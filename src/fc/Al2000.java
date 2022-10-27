@@ -62,6 +62,62 @@ public class Al2000 {
 	
 	public int changementStockFilm() {
 		return 0;
+		
+	}
+	
+	
+	
+	/**
+	 * Getter et Setters en dessous de ça 
+	 * @return
+	 */
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public User getUserActuel() {
+		return userActuel;
+	}
+
+	public void setUserActuel(User userActuel) {
+		this.userActuel = userActuel;
+	}
+
+	public Abonnement getAboActuel() {
+		return aboActuel;
+	}
+
+	public void setAboActuel(Abonnement aboActuel) {
+		this.aboActuel = aboActuel;
+	}
+
+	public ArrayList<SuperUser> getSuperUsersActuelle() {
+		return superUsersActuelle;
+	}
+
+	public void setSuperUsersActuelle(ArrayList<SuperUser> superUsersActuelle) {
+		this.superUsersActuelle = superUsersActuelle;
+	}
+
+	public ArrayList<FilmPhysique> getFilmsPhysique() {
+		return filmsPhysique;
+	}
+
+	public void setFilmsPhysique(ArrayList<FilmPhysique> filmsPhysique) {
+		this.filmsPhysique = filmsPhysique;
+	}
+
+	public ArrayList<Film> getFilmsChargés() {
+		return filmsChargés;
+	}
+
+	public void setFilmsChargés(ArrayList<Film> filmsChargés) {
+		this.filmsChargés = filmsChargés;
 	}
 
 }
