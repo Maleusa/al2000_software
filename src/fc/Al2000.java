@@ -129,12 +129,12 @@ public class Al2000 {
 		this.filmsPhysique = filmsPhysique;
 	}
 
-	public ArrayList<Film> getFilmsChargés() {
+	public ArrayList<Film> getFilmsCharges() {
 		return filmsCharge;
 	}
 
-	public void setFilmsChargés(ArrayList<Film> filmsChargés) {
-		this.filmsCharge = filmsChargés;
+	public void setFilmsCharges(ArrayList<Film> filmsCharges) {
+		this.filmsCharge = filmsCharges;
 	}
 
 }
