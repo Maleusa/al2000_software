@@ -2,6 +2,7 @@ package fc;
 
 import java.util.ArrayList;
 
+import fc.errorHandling.ErrorHandler;
 import fc.movie.Film;
 import fc.movie.FilmPhysique;
 import fc.user.Abonnement;
@@ -17,12 +18,28 @@ import fc.user.User;
  */
 public class Al2000 {
 	private int id;
+	private ErrorHandler errorHandler;
 	private User userActuel;
 	private Abonnement aboActuel;
 	ArrayList<SuperUser> superUsersActuelle;
 	//Ne pas oublier de mettre une instance du database listener
 	ArrayList<FilmPhysique> filmsPhysique;
-	ArrayList<Film> filmsChargés;
+	ArrayList<Film> filmsCharge;
+	public Al2000(int id) {
+		this.id=id;
+		filmsPhysique=initStockFilm();
+		filmsCharge=initFilmCharge();
+	}
+
+	private ArrayList<Film> initFilmCharge() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private ArrayList<FilmPhysique> initStockFilm() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public int rendreFilm() {
 		return 0;
@@ -113,11 +130,11 @@ public class Al2000 {
 	}
 
 	public ArrayList<Film> getFilmsChargés() {
-		return filmsChargés;
+		return filmsCharge;
 	}
 
 	public void setFilmsChargés(ArrayList<Film> filmsChargés) {
-		this.filmsChargés = filmsChargés;
+		this.filmsCharge = filmsChargés;
 	}
 
 }
