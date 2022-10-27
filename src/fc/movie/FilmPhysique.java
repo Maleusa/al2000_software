@@ -1,6 +1,8 @@
-package fc;
+package fc.movie;
 
-public class FilmDemat implements FilmLouable {
+import fc.Al2000;
+
+public class FilmPhysique implements FilmLouable {
 
 	@Override
 	public int louer(Al2000 al2000) {

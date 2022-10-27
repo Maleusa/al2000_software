@@ -1,4 +1,6 @@
-package fc;
+package fc.movie;
+
+import fc.Al2000;
 
 public interface FilmLouable {
 public int louer(Al2000 al2000);

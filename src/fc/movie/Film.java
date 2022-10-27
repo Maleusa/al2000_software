@@ -1,4 +1,4 @@
-package fc;
+package fc.movie;
 
 public class Film {
 
