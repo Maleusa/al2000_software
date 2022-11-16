@@ -2,7 +2,7 @@ package fc;
 
 import java.util.ArrayList;
 
-import fc.errorHandling.ErrorHandler;
+
 import fc.movie.Film;
 import fc.movie.FilmPhysique;
 import fc.user.Abonnement;
@@ -18,7 +18,6 @@ import fc.user.User;
  */
 public class Al2000 {
 	private int id;
-	private ErrorHandler errorHandler;
 	private User userActuel;
 	private Abonnement aboActuel;
 	ArrayList<SuperUser> superUsersActuelle;

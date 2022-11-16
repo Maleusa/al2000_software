@@ -1,5 +1,5 @@
 package fc.movie;
 
-public class Film {
+public abstract class Film {
 
 }

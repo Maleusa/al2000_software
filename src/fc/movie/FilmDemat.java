@@ -2,7 +2,7 @@ package fc.movie;
 
 import fc.Al2000;
 
-public class FilmDemat implements FilmLouable {
+public class FilmDemat extends Film implements FilmLouable {
 
 	@Override
 	public int louer(Al2000 al2000) {
