@@ -1,12 +1,14 @@
 package fc.user;
 
-public class Technicien extends User {
+public class TechnicalUser extends User {
 	private String login;
 	private String password;
 	
-	public Technicien() {
-		
+	public TechnicalUser(String login, String password) {
+		this.login=login;
+		this.password=password;
 	}
+	
 	
 	public boolean checkIdentity(String login, String password) {
 		boolean id = this.login.equalsIgnoreCase(login);

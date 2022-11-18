@@ -135,5 +135,7 @@ public class Al2000 {
 	public void setFilmsCharges(ArrayList<Film> filmsCharges) {
 		this.filmsCharge = filmsCharges;
 	}
+	
+	
 
 }
