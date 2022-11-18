@@ -10,5 +10,11 @@ class TechnicienTest {
 	void test() {
 		fail("Not yet implemented");
 	}
+	
+	//Précondition :
+	//Postcondition :
+	void testCoupleLoginValid() {
+		
+	}
 
 }
