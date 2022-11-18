@@ -1,8 +1,8 @@
 package fc.tag;
 
-public class TagAnnee extends Tag {
+public class NameTag extends Tag {
 
-	public TagAnnee() throws Exception {
+	public NameTag() throws Exception {
 		super();
 		// TODO Auto-generated constructor stub
 	}

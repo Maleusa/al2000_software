@@ -1,8 +1,8 @@
 package fc.tag;
 
-public class TagGenre extends Tag {
+public class GenreTag extends Tag {
 
-	public TagGenre() throws Exception {
+	public GenreTag() throws Exception {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -1,4 +1,7 @@
 package fc.tag;
+
+import java.lang.reflect.InvocationTargetException;
+
 /**
  *Classe abstraite permettant de transformer les descripteurs en
  *tout genre en des objets comparable les uns avec les autres 
@@ -32,11 +35,24 @@ public abstract class Tag implements Cloneable {
 	@SuppressWarnings("deprecation")
 	public Tag clone() {
 		try {
-			return this.getClass().newInstance();
+			return this.getClass().getConstructor().newInstance(this);
 		} catch (InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return null;
 	}
 	/**
 	 * Constructeur secondaire d'un Tag si l'on veut modifier exceptionnelement la priorité d'un tag malgré
@@ -49,7 +65,7 @@ public abstract class Tag implements Cloneable {
 		this.prio=prio;
 	}
 	public String getTag() {
-		return tag.clone();
+		return tag;
 	}
 	public void setTag(String tag) {
 		this.tag = tag;
