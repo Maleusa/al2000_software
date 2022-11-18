@@ -9,8 +9,12 @@ public class GenreTag extends Tag {
 
 	public GenreTag(String tag) {
 		super(tag);
-		this.setPrio(Priority.Quatre);
+		this.setPrio(constant.Priority.CINQ);
 	}
+	public GenreTag(GenreTag genre) {
+		super(genre.getTag(),constant.Priority.CINQ);
+	}
+
 	@Override
 	public String query() {
 		String s=new String("SELECT * from FILMS where GENRE LIKE '%"+this.getTag()+"%'");

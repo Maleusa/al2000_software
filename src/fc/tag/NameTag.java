@@ -9,8 +9,14 @@ public class NameTag extends Tag {
 
 	public NameTag(String tag) {
 		super(tag);
-		this.setPrio(Priority.Un);
+		this.setPrio(constant.Priority.UN);
 	}
+	public NameTag(NameTag name) {
+		super(name.getTag(),constant.Priority.UN);
+	}
+
+	
+
 	@Override
 	public String query() {
 		String s=new String("SELECT * from FILMS where NOM LIKE '%"+this.getTag()+"%'");

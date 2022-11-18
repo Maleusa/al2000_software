@@ -1,5 +1,7 @@
 package fc.tag;
 
+import constant.Priority;
+
 public class ClassificationTag extends Tag {
 
 	public ClassificationTag() throws Exception {
@@ -7,9 +9,18 @@ public class ClassificationTag extends Tag {
 		// TODO Auto-generated constructor stub
 	}
 
+	public ClassificationTag(String string) {
+		super(string,constant.Priority.QUATRE);
+	}
+
+	public ClassificationTag(Tag classification) {
+		super(classification.getTag(),constant.Priority.QUATRE);
+		
+	}
+
 	@Override
 	public String query() {
-		String s=new String("SELECT * from FILMS where classification LIKE '%"+this.getTag()+"%'");
+		String s=new String("SELECT * from FILMS where CLASSIFICATION LIKE '%"+this.getTag()+"%'");
 		return s;
 	}
 

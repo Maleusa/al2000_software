@@ -8,7 +8,12 @@ public class YearTag extends Tag {
 	}
 	public YearTag(String tag) {
 		super(tag);
-		this.setPrio(Priority.Sept);
+		this.setPrio(constant.Priority.SEPT);
+	}
+	public YearTag(Tag tag) {
+		super(tag);
+		this.setPrio(constant.Priority.SEPT);
+		
 	}
 	@Override
 	public String query() {

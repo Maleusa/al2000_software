@@ -7,9 +7,17 @@ public class DirectorTag extends Tag {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public DirectorTag(String string) {
+		super(string,constant.Priority.TROIS);
+	}
+
+	public DirectorTag(DirectorTag director) {
+		super(director.getTag(),constant.Priority.TROIS);
+	}
+
 	@Override
 	public String query() {
-		String s=new String("SELECT * from FILMS where DIRECTEURS LIKE '%"+this.getTag()+"%'");
+		String s=new String("SELECT * from FILMS where REALISATEURS LIKE '%"+this.getTag()+"%'");
 		return s;
 	}
 }
