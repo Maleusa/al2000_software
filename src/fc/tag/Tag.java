@@ -54,6 +54,8 @@ public abstract class Tag implements Cloneable {
 		}
 		return null;
 	}
+	public abstract String query();
+	
 	/**
 	 * Constructeur secondaire d'un Tag si l'on veut modifier exceptionnelement la priorité d'un tag malgré
 	 * sa classe réel

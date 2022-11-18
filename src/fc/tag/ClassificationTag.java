@@ -7,4 +7,10 @@ public class ClassificationTag extends Tag {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String query() {
+		String s=new String("SELECT * from FILMS where classification LIKE '%"+this.getTag()+"%'");
+		return s;
+	}
+
 }

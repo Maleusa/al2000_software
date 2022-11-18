@@ -7,4 +7,13 @@ public class NameTag extends Tag {
 		// TODO Auto-generated constructor stub
 	}
 
+	public NameTag(String tag) {
+		super(tag);
+		this.setPrio(Priority.Un);
+	}
+	@Override
+	public String query() {
+		String s=new String("SELECT * from FILMS where NOM LIKE '%"+this.getTag()+"%'");
+		return s;
+	}
 }

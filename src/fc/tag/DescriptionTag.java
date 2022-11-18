@@ -6,5 +6,10 @@ public class DescriptionTag extends Tag {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	@Override
+	public String query() {
+		String s=new String("SELECT * from FILMS where DESCRIPTION LIKE '%"+this.getTag()+"%'");
+		return s;
+	}
 }
