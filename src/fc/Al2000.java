@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import fc.movie.Film;
 import fc.movie.FilmPhysique;
 import fc.user.Abonnement;
+import fc.user.CarteAbonnement;
 import fc.user.Historique;
 import fc.user.SuperUser;
 import fc.user.User;
@@ -18,9 +19,10 @@ import fc.user.User;
  */
 public class Al2000 {
 	private int id;
-	private User userActuel;
+	private User currentUser;
 	private Abonnement aboActuel;
 	ArrayList<SuperUser> superUsersActuelle;
+	private MemoryBuffer buffer;
 	//Ne pas oublier de mettre une instance du database listener
 	ArrayList<FilmPhysique> filmsPhysique;
 	ArrayList<Film> filmsCharge;
@@ -28,6 +30,7 @@ public class Al2000 {
 		this.id=id;
 		filmsPhysique=initStockFilm();
 		filmsCharge=initFilmCharge();
+		buffer=new MemoryBuffer();
 	}
 
 	private ArrayList<Film> initFilmCharge() {
@@ -97,11 +100,11 @@ public class Al2000 {
 	}
 
 	public User getUserActuel() {
-		return userActuel;
+		return currentUser;
 	}
 
 	public void setUserActuel(User userActuel) {
-		this.userActuel = userActuel;
+		this.currentUser = userActuel;
 	}
 
 	public Abonnement getAboActuel() {
@@ -136,6 +139,29 @@ public class Al2000 {
 		this.filmsCharge = filmsCharges;
 	}
 	
+	public void setBuffer(MemoryBuffer buffer) {
+		this.buffer=buffer;
+	}
+	/*
+	 * Méthodes appelé lors d'interaction avec la machine Al2000
+	 */
 	
-
+	public boolean checkUserIdentity() {
+		//Not implemented
+		currentUser.checkIdentity(null, null);
+		return true;
+	}
+	
+	public boolean deleteSubscriber(int id) {
+		//Send an order to the buffer to delete the subscriber with id : id
+		return buffer.deleteSubscriber(id);
+	}
+	
+	public boolean modificationOnSubscriber(Abonnement s) {
+		return buffer.modificationOnSubscriber(s);
+	}
+	
+	public boolean logOut(User u) {
+		return buffer.logOut(u);
+	}
 }

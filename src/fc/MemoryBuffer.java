@@ -3,16 +3,19 @@ package fc;
 import java.util.HashMap;
 
 import fc.tag.Tag;
+import fc.user.Abonnement;
+import fc.user.CarteAbonnement;
+import fc.user.User;
 
 public class MemoryBuffer extends Thread{
-	private HashMap<Object,Integer> Buffer;
+	private HashMap<Object,Integer> buffer;
 	
 	public MemoryBuffer() {
-		Buffer=new HashMap<Object,Integer>();
+		buffer=new HashMap<Object,Integer>();
 	}
 
 	public boolean isIn(Object o) {
-		if (Buffer.containsValue(o)) return true;
+		if (buffer.containsValue(o)) return true;
 		else return false;
 		
 	}
@@ -30,10 +33,33 @@ public class MemoryBuffer extends Thread{
 		return  e;
 	}
 	public HashMap<Object, Integer> getBuffer() {
-		return Buffer;
+		return buffer;
 	}
 
 	public void setBuffer(HashMap<Object, Integer> buffer) {
-		Buffer = buffer;
+		this.buffer = buffer;
+	}
+	
+	public void add(Object o, Integer id) {
+		buffer.put(o, id);
+	}
+	
+	public boolean deleteSubscriber(int id) {
+		//Send request to dao to delete subscriber n°id
+		//return true if dao return true to suppression
+		
+		//return dao.deleteSubscriber(int id)
+
+		return true;
+	}
+	
+	public boolean modificationOnSubscriber(Abonnement s) {
+		//Send 
+		return true;
+	}
+	
+	public boolean logOut(User u) {
+		//dao.update
+		return true;
 	}
 }
