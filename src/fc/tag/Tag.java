@@ -6,7 +6,7 @@ package fc.tag;
  * @author yazid
  *
  */
-public abstract class Tag {
+public abstract class Tag implements Cloneable {
 	private String tag;
 	private Priority prio;
 	/**
@@ -22,7 +22,21 @@ public abstract class Tag {
 	 * @param tag
 	 */
 	public Tag(String tag) {
+		
 		this.tag=tag;
+	}
+	public Tag(Tag tag) {
+		this.tag=tag.tag;
+		this.prio=tag.prio;
+	}
+	@SuppressWarnings("deprecation")
+	public Tag clone() {
+		try {
+			return this.getClass().newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	/**
 	 * Constructeur secondaire d'un Tag si l'on veut modifier exceptionnelement la priorité d'un tag malgré
@@ -35,7 +49,7 @@ public abstract class Tag {
 		this.prio=prio;
 	}
 	public String getTag() {
-		return tag;
+		return tag.clone();
 	}
 	public void setTag(String tag) {
 		this.tag = tag;
