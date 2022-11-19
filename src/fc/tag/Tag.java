@@ -72,6 +72,11 @@ public abstract class Tag  {
 		
 		
 	}
+	/**
+	 * refactor with ignore case //TODO
+	 * @param t
+	 * @return
+	 */
 	public boolean similareTo(Tag t) {
 		if(this.toString().contains(t.toString())) return true;
 		else if(t.toString().contains(this.toString())) return true;

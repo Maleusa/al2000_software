@@ -3,7 +3,6 @@ package fc;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map.Entry;
 
 import dao.DatabaseUpdater;
@@ -40,6 +39,7 @@ public class MemoryBuffer extends Thread{
 	 * @return arraylist de film contenant le tag
 	 */
 	public ArrayList<Film> getMovies(Tag tag){
+		refresh();
 		ArrayList<Film> temp = new ArrayList<Film>();
 		int numberOfMoviesByTag;
 		int bufferedMovie=0;
@@ -93,7 +93,56 @@ public class MemoryBuffer extends Thread{
 		
 	}
 	
+	public boolean flush() {
+		associationMap.clear();
+		movieBuffer.clear();
+		pageBuffer.clear();
+		lastUpdate=new Date();
+		return true;
+	}
 	
+	public boolean logOut(Object o) {
+		refresh();
+		if(!updater.push(o)) return false;
+		pageBuffer.clear();
+		return true;
+	}
+	
+	public boolean modification(Object o) {
+		refresh();
+		return updater.push(o);
+		
+	}
+	
+	public Page getPreviousPage(Page p) {
+		refresh();
+		for(Entry<Page, Integer> f:pageBuffer.entrySet()) {
+			if (f.getKey().getClass()==p.getClass()) {
+				f.setValue(constant.Values.USED);
+				return f.getKey();
+			}
+		}
+		
+		return updater.pull(p);
+		
+	}
+	/**
+	 * //TODO Demander à Guillaume si ça marche
+	 */
+	public void refresh() {
+		if(new Date().getTime()-lastUpdate.getTime()<constant.Values.REFRESH_TIMER)return;
+		for (Entry<Page, Integer> f:pageBuffer.entrySet()) {
+			if(f.getValue()==0)
+				pageBuffer.remove(f.getKey());
+			else f.setValue(f.getValue()-1);
+		}
+		for (Entry<Film, Integer> f:movieBuffer.entrySet()) {
+			if(f.getValue()==0)
+				movieBuffer.remove(f.getKey());
+			else f.setValue(f.getValue()-1);
+		}
+		lastUpdate=new Date();
+	}
 	
 	public Object getObject(Tag tag) {
 		Object e=new Object();
