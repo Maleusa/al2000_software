@@ -58,7 +58,7 @@ public class MemoryBuffer extends Thread{
 		return true;
 	}
 	
-	public boolean logOut(User u) {
+	public boolean logOut() {
 		//dao.update
 		return true;
 	}

@@ -28,8 +28,9 @@ public class CarteAbonnement extends Abonnement {
 		addToSolde(v);
 	}
 	
-	public void preleverCompte(int v) {
+	public void preleverCompte(int v) throws PasSuffisamentArgentCompteAboException {
 		if(v<=0) throw new RuntimeException("Le prelevement est null ou négatif");
+		if(this.solde-v<0) throw new PasSuffisamentArgentCompteAboException("L'exception sera gerer au niveau supérieur : au lieu de retire de l'argent à abo, on prélève sur la cb.");
 		addToSolde(-v);
 	}
 	

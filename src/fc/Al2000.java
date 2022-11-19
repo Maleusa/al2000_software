@@ -162,6 +162,6 @@ public class Al2000 {
 	}
 	
 	public boolean logOut(User u) {
-		return buffer.logOut(u);
+		return buffer.logOut();
 	}
 }
