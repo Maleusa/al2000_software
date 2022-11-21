@@ -16,6 +16,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Kilian/Downloads/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kilian/Downloads/jsch-0.1.54.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5">
 		<attributes>
 			<attribute name="module" value="true"/>

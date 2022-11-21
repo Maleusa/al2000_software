@@ -10,13 +10,21 @@ public class LocalDBconnection extends Thread{
 	public LocalDBconnection() throws SQLException, ClassNotFoundException {
 		DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 		Class.forName("oracle.jdbc.driver.OracleDriver");
+	public LocalDBconnection() throws SQLException {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 		base = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/"+database, "hr", "hr"); // connexion
 		System.out.println("base connected");
 	}
 	
 	public void connect() throws SQLException {
 		String s1 = "alter session set container = al2000";
-		String s2 = "connect kilian password";
+		String s2 = "connect hr hr";
 		execquerry newquerry= new execquerry(base, s1);
 		execquerry newquerry2= new execquerry(base, s2);
 	}
@@ -38,6 +46,8 @@ public class LocalDBconnection extends Thread{
 		try {
 			LocalDBconnection aaa= new LocalDBconnection();
 		} catch (SQLException | ClassNotFoundException e) {
+			LocalDBconnection aaaa = new LocalDBconnection();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
