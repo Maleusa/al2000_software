@@ -11,7 +11,7 @@ class TechnicienTest {
 		fail("Not yet implemented");
 	}
 	
-	//Précondition :
+	//Prï¿½condition :
 	//Postcondition :
 	void testCoupleLoginValid() {
 		
