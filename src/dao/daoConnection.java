@@ -55,7 +55,7 @@ public class daoConnection extends Thread{
 		try {
 			String sshHost = "im2ag-mandelbrot.univ-grenoble-alpes.fr";
 
-			String strRemoteHost="im2ag-.univ-grenoble-alpes.fr";
+			String strRemoteHost="im2ag-oracle.univ-grenoble-alpes.fr";
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			session =doSshTunnel(sshUser, sshPassword, sshHost, sshPort, strRemoteHost, nLocalPort, nRemotePort);
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
