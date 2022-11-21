@@ -1,3 +1,6 @@
+#ignore classpath and othe
+*.classpath
+
 # Compiled class file
 *.class
 
