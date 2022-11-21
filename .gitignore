@@ -1,5 +1,7 @@
 #ignore classpath and othe
 *.classpath
+/bin/
+*.project
 
 # Compiled class file
 *.class
