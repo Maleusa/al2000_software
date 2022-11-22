@@ -1,28 +1,30 @@
 package fc.movie;
 
 import fc.Al2000;
+import fc.Constants;
 
 public class FilmPhysique extends Film implements FilmLouable {
 	DammageState state;
 	
 	public FilmPhysique(){
-		state = DammageState.OPERATIONNAL;
+		this("");
 	}
 	
 	public FilmPhysique(String titre) {
 		state = DammageState.OPERATIONNAL;
 		this.titre=titre;
+		this.prix=Constants.PRIXPHYSIQUE;
 	}
 	@Override
-	public int louer(Al2000 al2000) {
+	public void louer(Al2000 al2000) {
 		// TODO Auto-generated method stub
-		return 0;
+		al2000.louerFilmPhysique();
 	}
 
 	@Override
-	public int rendre(Al2000 al2000) {
+	public void rendre(Al2000 al2000) {
 		// TODO Auto-generated method stub
-		return 0;
+		
 	}
 	
 	public boolean equals(FilmPhysique film) {

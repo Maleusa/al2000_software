@@ -52,7 +52,7 @@ public class TechnicalUser extends User {
 	public void louerFilm(Al2000 al, FilmLouable film) {
 		//ask the user to enter an abonnement id
 		CarteAbonnement s = new CarteAbonnement(0, "abo0", "password0");
-		s.louerFilm(al, film);
+		louerFilm(al, film, s);
 	}
 	
 	public void louerFilm(Al2000 al, FilmLouable film, CarteAbonnement s) {

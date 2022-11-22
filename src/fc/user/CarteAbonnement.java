@@ -3,7 +3,10 @@ package fc.user;
 import java.util.ArrayList;
 
 import fc.Al2000;
+import fc.Constants;
+import fc.movie.FilmDemat;
 import fc.movie.FilmLouable;
+import fc.movie.FilmPhysique;
 
 public class CarteAbonnement extends Abonnement {
 	private int solde=0;
@@ -49,10 +52,23 @@ public class CarteAbonnement extends Abonnement {
 
 	@Override
 	public void louerFilm(Al2000 al, FilmLouable film) {
-		// TODO Auto-generated method stub
-		//BLAbla je loue un film
-		
-		
+		if(film instanceof FilmDemat) {
+			int prix = film.getPrix()-Constants.REDUCTIONABONNEMENT;
+			try {
+				preleverCompte(prix);
+			}catch(PasSuffisamentArgentCompteAboException e){
+				Client c = (Client)al.getUserActuel();
+				if(!c.payementCB(prix)) throw new RuntimeException("Pas d'argent sur CB");	
+			}
+		}
+		for(int i=0; i<locations.length; i++) {
+			if(locations[i]==null) {
+				locations[i] = film;
+				break;
+			}
+		}
+		al.louerFilm(film);
+		al.modificationOnSubscriber(this);
 	}
 
 	@Override
@@ -61,9 +77,16 @@ public class CarteAbonnement extends Abonnement {
 		return false;
 	}
 
+
 	@Override
-	public void rendreFilm(Al2000 al, FilmLouable film) throws RenduFilmException {
-		// TODO Auto-generated method stub
+	public void rendreFilmEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
+		verificationCompatibiliteRendu(film);
+		
+	}
+
+	@Override
+	public void rendreFilmNonEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
+		verificationCompatibiliteRendu(film);
 		
 	}
 

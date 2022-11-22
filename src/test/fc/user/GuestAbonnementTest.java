@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import fc.Al2000;
+import fc.movie.FilmDemat;
 import fc.movie.FilmLouable;
 import fc.movie.FilmPhysique;
 import fc.user.GuestAbonnement;
@@ -23,42 +24,90 @@ class GuestAbonnementTest {
 	
 	@Test
 	void testLocation() {
-		FilmPhysique f = new FilmPhysique("Bad boys");
-		assertTrue(guest.getLocations()[0]==null);
-		guest.louerFilm(al, f);
-		assertTrue(guest.getLocations()[0]!=null);
-		assertTrue(guest.getLocations()[0].equals(f));
-		guest.getLocations()[0]=null;
+		//La location ne nécessite pas d'argent c'est le rendu pour les films physiques
+		//Payment instantané pour film demat
+				
+		try {
+			
+			FilmPhysique f = new FilmPhysique("Bad boys");
+			assertTrue(guest.getLocations()[0]==null);
+			guest.louerFilm(al, f);
+			assertTrue(guest.getLocations()[0]!=null);
+			assertTrue(guest.getLocations()[0].equals(f));
+			guest.getLocations()[0]=null;
+			
+			FilmDemat fd = new FilmDemat("Bad boys 2");
+			assertTrue(guest.getLocations()[0]==null);
+			guest.louerFilm(al, fd);
+			assertTrue(guest.getLocations()[0]!=null);
+			assertTrue(guest.getLocations()[0].equals(fd));
+		
+			
+		}catch(RuntimeException r) {
+			fail("La location n'a pas accepté le payment");
+		}
+		
 	}
 	
 	@Test
-	void testRendu() {
+	void testRenduNonEndommage() {
 		FilmPhysique f = new FilmPhysique("Bad boys");
 		FilmPhysique f2 = new FilmPhysique("bad boys 2");
 		assertTrue(guest.getLocations()[0]==null);
 		try {
-			guest.rendreFilm(al, f);
+			guest.rendreFilmNonEndommage(al, f);
 			fail("Guest ne doit pas pouvoir rendre le film puisque sa location est null");
 		} catch (RenduFilmException e) {
 			//Suite du test uniquement si il n'a pas fail
 			assertTrue(guest.getLocations()[0]==null);
 			guest.getLocations()[0]=f;
 			try {
-				guest.rendreFilm(al, f);
+				guest.rendreFilmNonEndommage(al, f);
 				assertTrue(guest.getLocations()[0]==null);
 			} catch (RenduFilmException e1) {
-				// TODO Auto-generated catch block
 				fail("Ne devrait pas renvoyer d'exception car on rend f avec comme location le film f");
 			}
 			guest.getLocations()[0]=f;
 			try {
-				guest.rendreFilm(al, f2);
+				guest.rendreFilmNonEndommage(al, f2);
 				fail("On rend le mauvais film : f2 au lieu de f");
 			} catch (RenduFilmException e1) {
 				assertTrue(guest.getLocations()[0].equals(f));
+				fail("IL faut tester les débitement");
 			}
 		}
 		
+	}
+	
+	@Test 
+	void testRenduFilmEndommage(){
+		//on effectue la même batterie de test mais cette fois 
+		//La méthode est renduFilmEndommage
+		FilmPhysique f = new FilmPhysique("Bad boys");
+		FilmPhysique f2 = new FilmPhysique("bad boys 2");
+		assertTrue(guest.getLocations()[0]==null);
+		try {
+			guest.rendreFilmEndommage(al, f);
+			fail("Guest ne doit pas pouvoir rendre le film puisque sa location est null");
+		} catch (RenduFilmException e) {
+			//Suite du test uniquement si il n'a pas fail
+			assertTrue(guest.getLocations()[0]==null);
+			guest.getLocations()[0]=f;
+			try {
+				guest.rendreFilmEndommage(al, f);
+				assertTrue(guest.getLocations()[0]==null);
+			} catch (RenduFilmException e1) {
+				fail("Ne devrait pas renvoyer d'exception car on rend f avec comme location le film f");
+			}
+			guest.getLocations()[0]=f;
+			try {
+				guest.rendreFilmEndommage(al, f2);
+				fail("On rend le mauvais film : f2 au lieu de f");
+			} catch (RenduFilmException e1) {
+				assertTrue(guest.getLocations()[0].equals(f));
+				fail("IL faut tester les débitement");
+			}
+		}
 	}
 	
 	@Test
@@ -74,7 +123,7 @@ class GuestAbonnementTest {
 		guest.louerFilm(al, f);
 		assertTrue(guest.mustEndALocationFirst());
 		try {
-			guest.rendreFilm(al, f);
+			guest.rendreFilmNonEndommage(al, f);
 		} catch (RenduFilmException e) {
 			fail("Il ne devrait pas y avoir d'erreur soulever");
 		}

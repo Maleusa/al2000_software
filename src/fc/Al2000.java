@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 import fc.movie.Film;
+import fc.movie.FilmLouable;
 import fc.movie.FilmPhysique;
 import fc.user.Abonnement;
 import fc.user.CarteAbonnement;
@@ -32,6 +33,11 @@ public class Al2000 {
 		filmsCharge=initFilmCharge();
 		buffer=new MemoryBuffer();
 	}
+	
+	public Al2000(int id, User u) {
+		this(id);
+		this.currentUser=u;
+	}
 
 	private ArrayList<Film> initFilmCharge() {
 		// TODO Auto-generated method stub
@@ -43,16 +49,28 @@ public class Al2000 {
 		return null;
 	}
 
-	public int rendreFilm() {
-		return 0;
+	public void louerFilm(FilmLouable film) {
+		film.louer(this);
 	}
 	
-	public int louerFilm() {
-		return 0;
+	public void louerFilmPhysique() {
+		//Modifie la liste de filmPhysique avec loué ou non
+		System.out.println("Sortie d'un bluray par la trappe");
 	}
 	
-	public int rendreFilmEndommage() {
-		return 0;
+	public void louerFilmDemat() {
+		System.out.println("Sortie d'un qr code");
+	}
+
+	public void rendreFilm(FilmLouable film) {
+		film.rendre(this);
+	}
+	
+	public void rendreFilmBonEtat(FilmLouable film) {
+		
+	}
+	public void rendreFilmEndommage(FilmLouable film) {
+		
 	}
 	
 	public int arriveClient() {

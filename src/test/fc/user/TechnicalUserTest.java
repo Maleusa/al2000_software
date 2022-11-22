@@ -132,7 +132,9 @@ class TechnicalUserTest {
 			assertTrue(f==null);
 		
 		technical.louerFilm(al, film1, c);
-		assertTrue(c.getLocations()[0].equals(film1));
+		assertTrue(c.getLocations()[1].equals(film1));
+		
+		fail("Location chez carteAbonnement ne passe pas encore le test");
 		
 	}
 	

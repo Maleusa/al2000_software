@@ -3,7 +3,10 @@ package fc.user;
 import java.util.ArrayList;
 
 import fc.Al2000;
+import fc.movie.FilmDemat;
 import fc.movie.FilmLouable;
+import fc.movie.FilmPhysique;
+import fc.user.*;
 
 public class GuestAbonnement extends Abonnement {
 	
@@ -18,8 +21,12 @@ public class GuestAbonnement extends Abonnement {
 
 	@Override
 	public void louerFilm(Al2000 al, FilmLouable film) {
-		// TODO Auto-generated method stub
+		if(film.getClass().isInstance(FilmDemat.class)) {
+			Client c = (Client)al.getUserActuel();
+			if(!c.payementCB(film.getPrix())) throw new RuntimeException("Pas d'argent sur CB");
+		}
 		locations[0] = film;
+		al.louerFilm(film);
 		al.modificationOnSubscriber(this);
 	}
 	@Override
@@ -27,12 +34,22 @@ public class GuestAbonnement extends Abonnement {
 		return locations[0]!=null;
 	}
 	@Override
-	public void rendreFilm(Al2000 al, FilmLouable film) throws RenduFilmException {
-		if(locations[0]==null || !locations[0].equals(film)) throw new RenduFilmException("Pas de correspondance de rendu");
+	public void rendreFilmNonEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
+		verificationCompatibiliteRendu(film);
 		locations[0]=null;
+		al.rendreFilmBonEtat(film);
 		al.modificationOnSubscriber(this);
 		
 	}
+	@Override
+	public void rendreFilmEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
+		verificationCompatibiliteRendu(film);
+		locations[0]=null;
+		al.rendreFilmEndommage(film);
+		al.modificationOnSubscriber(this);
+	}
+	
+	
 	
 
 }

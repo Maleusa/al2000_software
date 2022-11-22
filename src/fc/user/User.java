@@ -11,4 +11,5 @@ public abstract class User {
 	public boolean logOut(Al2000 al) {
 		return al.logOut(this);
 	}
+	
 }
