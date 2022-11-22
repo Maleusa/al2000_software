@@ -21,7 +21,7 @@ public class GuestAbonnement extends Abonnement {
 
 	@Override
 	public void louerFilm(Al2000 al, FilmLouable film) {
-		if(film.getClass().isInstance(FilmDemat.class)) {
+		if(film instanceof FilmDemat) {
 			Client c = (Client)al.getUserActuel();
 			if(!c.payementCB(film.getPrix())) throw new RuntimeException("Pas d'argent sur CB");
 		}

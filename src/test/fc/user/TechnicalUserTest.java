@@ -142,4 +142,9 @@ class TechnicalUserTest {
 	void testLogOut() {
 		assertTrue(technical.logOut(al));
 	}
+	
+	@Test
+	void testRenduFilmPhysiquePourUnAUtreAbo() {
+		fail("Unimplemented");
+	}
 }
