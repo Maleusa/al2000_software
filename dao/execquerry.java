@@ -17,8 +17,6 @@ public class execquerry {
 	public ResultSet sendquerry() throws SQLException {
 		Statement requete = base.createStatement();
 		ResultSet resultat = requete.executeQuery(querry);
-		requete.close();
-		resultat.close();
 		return resultat;
 	}
 }
