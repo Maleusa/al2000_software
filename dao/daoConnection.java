@@ -16,7 +16,7 @@ public class daoConnection extends Thread{
 	String sshPassword;	//Pa$$word
 	String sshHost = "im2ag-mandelbrot.univ-grenoble-alpes.fr";
 	int sshPort =22;
-	int nLocalPort=38940;
+	int nLocalPort=38941;
 	int nRemotePort = 1521;
 	Connection base;
 
@@ -59,7 +59,8 @@ public class daoConnection extends Thread{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			session =doSshTunnel(sshUser, sshPassword, sshHost, sshPort, strRemoteHost, nLocalPort, nRemotePort);
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			base = DriverManager.getConnection("jdbc:oracle:thin:@localhost:"+nLocalPort+":im2ag", sshUser, "942e7b79fc"); // connexion
+			base = DriverManager.getConnection("jdbc:oracle:thin:@localhost:"+nLocalPort+":im2ag", sshUser, "94bf0ae10f"); // connexion
+			base.setAutoCommit(false);
 			System.out.println("base connected");
 
 			return base;

@@ -123,7 +123,7 @@ public class Downloader extends SwingWorker<String,String> {
         catch (IOException e) {
             System.err.println("Failed to create directory!" + e.getMessage());
         }
-		while ((url = br.readLine()) != null) {
+		/*while ((url = br.readLine()) != null) {
 			try {
 	        	Downloader thread_dl = new Downloader(url, dir);
 	        	thread_dl.download();
@@ -131,7 +131,7 @@ public class Downloader extends SwingWorker<String,String> {
 	        catch(Exception e) {
 	        	continue;
 	        }
-		}
+		}*/
 		br.close();
 		return (dir.toString()+ "\\");
 	}

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
@@ -14,30 +15,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import org.apache.ibatis.jdbc.ScriptRunner;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
 		daoConnection aaa = new daoConnection();
 		aaa.connectDB();
-		
-		execquerry moreCursors = new execquerry(aaa.base, "ALTER SYSTEM SET open_cursors =1000 SCOPE=BOTH;");
-		moreCursors.sendquerry();
-		
-		FileSystem fs = FileSystems.getDefault();
-		Path pathSQL = fs.getPath("C:\\Users\\Kilian\\Documents\\scriptSQL.txt");
-		FileReader fileSQL = new FileReader(pathSQL.toString());
-		BufferedReader br = new BufferedReader(fileSQL);
-		String sqlQuerry1 = "";
-		String buff = br.readLine();
-		while (buff!=null) {
-			sqlQuerry1 = sqlQuerry1 + buff + "\n";
-			buff = br.readLine();
-		}
-
-		execquerry newquerry= new execquerry(aaa.base, sqlQuerry1);
-		newquerry.sendquerry();
-		
+		/*ScriptRunner sr = new ScriptRunner(aaa.base);
+		Reader reader = new BufferedReader(new FileReader("C:\\Users\\Kilian\\Documents\\al2000.sql"));
+		sr.runScript(reader);*/
 		//get all films id, titles, desc, release date
 		Downloader downloader = new Downloader();
 		String foldernametitle = downloader.urlFile("title");
@@ -101,8 +88,7 @@ public class Main {
 			aaa.base.commit();
 			pstmt.clearParameters();
 		}
-		
+			
 		aaa.disconnectDB();
-
 	}
 }
