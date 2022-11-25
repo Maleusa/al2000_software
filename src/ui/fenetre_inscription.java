@@ -14,10 +14,10 @@ import javax.swing.JFrame;
 
 
 public class fenetre_inscription extends JPanel{
-	String[] s = {"Nom","Prénom", "age", "adresse"};
-	JLabel nom,prenom,age,adresse;
-	JTextArea jT_nom,jT_prenom,jT_age,jT_adresse;
-	JButton button = new JButton("Valider");
+	String[] s = {"Nom","Prénom", "age", "adresse", "email"};
+	JLabel[] tabJLabel = new JLabel[s.length];
+	JTextArea[] tabTextArea = new JTextArea[s.length];
+	JButton button_valider = new JButton("Valider");
 	JButton button_retour = new JButton("Retour");
 	JPanel panel = new JPanel();
 	JPanel config = new JPanel();
@@ -29,15 +29,16 @@ public class fenetre_inscription extends JPanel{
 		config.add(button_retour);
 		super.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new GridLayout((s.length*2)+1,1));
-		panel.add(nom = new JLabel("nom"));
-		panel.add(jT_nom = new JTextArea());
-		panel.add(prenom = new JLabel("prénom"));
-		panel.add(jT_prenom = new JTextArea());
-		panel.add(age = new JLabel("age"));
-		panel.add(jT_age = new JTextArea());
-		panel.add(adresse = new JLabel("adresse"));
-		panel.add(jT_adresse = new JTextArea());
-		panel.add(button);
+		
+		//ajout des JLabel et JTextArea sur "panel"
+		//Elements de la liste dans l'ordre : "Nom","Prénom", "age", "adresse", "email"
+		for(int i = 0;i<s.length;i++) {
+			panel.add(tabJLabel[i] = new JLabel(s[i]));
+			panel.add(tabTextArea[i]=new JTextArea());
+			
+		}
+		panel.add(button_valider,BorderLayout.SOUTH);
+		
 		button_retour.addActionListener(new ActionListener() {
 			
 			@Override
