@@ -52,6 +52,7 @@ public class CarteAbonnement extends Abonnement {
 
 	@Override
 	public void louerFilm(Al2000 al, FilmLouable film) {
+		al.louerFilm(film);//Garde à modifier (if)
 		if(film instanceof FilmDemat) {
 			int prix = film.getPrix()-Constants.REDUCTIONABONNEMENT;
 			try {
@@ -67,7 +68,6 @@ public class CarteAbonnement extends Abonnement {
 				break;
 			}
 		}
-		al.louerFilm(film);
 		al.modificationOnSubscriber(this);
 	}
 

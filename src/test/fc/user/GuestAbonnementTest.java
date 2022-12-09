@@ -47,30 +47,37 @@ class GuestAbonnementTest {
 		assertTrue(guest.checkIdentity("WrongLog", "WrongPassword"));
 	}
 	
+	/*
+	 * La méthode testLocation effectue deux tests : 
+	 * Le film doit bien être ajouté à locations
+	 * L'argent doit bien être prélevé du compte en banque
+	 */
 	@Test
 	void testLocation() {
-		//La location ne nécessite pas d'argent c'est le rendu pour les films physiques
-		//Payment instantané pour film demat
-				
+		
+		/*
+		 * On s'assure qu'après usage de la méthode louerFilm, le film soit bien ajouté à locations 
+		 */	
 		try {
 			
+			guest.getLocations()[0]=null;
 			FilmPhysique f = new FilmPhysique("Bad boys");
 			assertTrue(guest.getLocations()[0]==null);
 			guest.louerFilm(al, f);
 			assertTrue(guest.getLocations()[0]!=null);
 			assertTrue(guest.getLocations()[0].equals(f));
+			
+			/*
+			 * On test que dans le cas d'un film dematérialisé, le client soit bien débité (sur sa CB)
+			 */
 			guest.getLocations()[0]=null;
-			
-
 			int argent = client.moneyInTheBank;
-			
 			FilmDemat fd = new FilmDemat("Bad boys 2");
 			assertTrue(guest.getLocations()[0]==null);
 			guest.louerFilm(al, fd);
 			assertTrue(guest.getLocations()[0]!=null);
 			assertTrue(guest.getLocations()[0].equals(fd));
-			
-			//Comme filmDemat et non abo on test le compte en banque
+
 			assertTrue(client.moneyInTheBank==(argent-Constants.PRIXDEMAT),"Money = "+client.moneyInTheBank+" devrait être :"+(argent-Constants.PRIXDEMAT));
 			
 		}catch(RuntimeException r) {
@@ -79,8 +86,16 @@ class GuestAbonnementTest {
 		
 	}
 	
+	/*
+	 * La méthode testRenduNonEndommage doit tester :
+	 * -Si le film rendu est bien un film qu'il a louer au préalable
+	 * -Si le guest est bien débité
+	 */
 	@Test
 	void testRenduNonEndommage() {
+		/*
+		 * On tente de rendre un film alors qu'il n'y a aucune location en cours
+		 */
 		FilmPhysique f = new FilmPhysique("Bad boys");
 		FilmPhysique f2 = new FilmPhysique("bad boys 2");
 		assertTrue(guest.getLocations()[0]==null);
@@ -88,7 +103,10 @@ class GuestAbonnementTest {
 			guest.rendreFilmNonEndommage(al, f);
 			fail("Guest ne doit pas pouvoir rendre le film puisque sa location est null");
 		} catch (RenduFilmException e) {
-			//Suite du test uniquement si il n'a pas fail
+			
+			/*
+			 * On tente de rendre le bon film (que l'on a loué au préalable)
+			 */
 			assertTrue(guest.getLocations()[0]==null);
 			guest.getLocations()[0]=f;
 			try {
@@ -97,22 +115,36 @@ class GuestAbonnementTest {
 			} catch (RenduFilmException e1) {
 				fail("Ne devrait pas renvoyer d'exception car on rend f avec comme location le film f");
 			}
-			guest.getLocations()[0]=f;
 			try {
+				
+				/*
+				 * On tente de rendre un film différent de celui de notre location en cours
+				 */
+				guest.getLocations()[0]=f;
 				guest.rendreFilmNonEndommage(al, f2);
 				fail("On rend le mauvais film : f2 au lieu de f");
 			} catch (RenduFilmException e1) {
 				assertTrue(guest.getLocations()[0].equals(f));
+				
+				
 				fail("IL faut tester les débitement");
 			}
 		}
 		
 	}
 	
+
+	/*
+	 * La méthode testRenduFilmEndommage() effectue une batterie de test similaire au renduNonEndommage
+	 * mais avec la méthode Endommage.
+	 * Le débitement est effectué de la même manière (le client sera ensuite remboursé plus tard).
+	 */
 	@Test 
 	void testRenduFilmEndommage(){
-		//on effectue la même batterie de test mais cette fois 
-		//La méthode est renduFilmEndommage
+		
+		/*
+		 * On tente de rendre un film alors qu'il n'y a aucune location en cours
+		 */
 		FilmPhysique f = new FilmPhysique("Bad boys");
 		FilmPhysique f2 = new FilmPhysique("bad boys 2");
 		assertTrue(guest.getLocations()[0]==null);
@@ -120,7 +152,10 @@ class GuestAbonnementTest {
 			guest.rendreFilmEndommage(al, f);
 			fail("Guest ne doit pas pouvoir rendre le film puisque sa location est null");
 		} catch (RenduFilmException e) {
-			//Suite du test uniquement si il n'a pas fail
+
+			/*
+			 * On tente de rendre le bon film (que l'on a loué au préalable)
+			 */
 			assertTrue(guest.getLocations()[0]==null);
 			guest.getLocations()[0]=f;
 			try {
@@ -129,17 +164,28 @@ class GuestAbonnementTest {
 			} catch (RenduFilmException e1) {
 				fail("Ne devrait pas renvoyer d'exception car on rend f avec comme location le film f");
 			}
-			guest.getLocations()[0]=f;
 			try {
+				
+				/*
+				 * On tente de rendre un film différent de celui de notre location en cours
+				 */
+				guest.getLocations()[0]=f;
 				guest.rendreFilmEndommage(al, f2);
 				fail("On rend le mauvais film : f2 au lieu de f");
 			} catch (RenduFilmException e1) {
 				assertTrue(guest.getLocations()[0].equals(f));
+				
+				
 				fail("IL faut tester les débitement");
 			}
 		}
 	}
 	
+	/*
+	 * La méthode testConnexionAvecLocationOuNon vérifie que le guest n'a pas déjà atteint sont nombre de locations
+	 * maximum. Si celui-ci à atteint le nombre maximum, le client ne peut rien effectuer d'autres que se déconnecter
+	 * ou rendre une de ses locations.
+	 */
 	@Test
 	void testConnexionAvecLocationOuNon() {
 		FilmPhysique f = new FilmPhysique("Bad boys");
@@ -155,7 +201,7 @@ class GuestAbonnementTest {
 		try {
 			guest.rendreFilmNonEndommage(al, f);
 		} catch (RenduFilmException e) {
-			fail("Il ne devrait pas y avoir d'erreur soulever");
+			fail("Il ne devrait pas y avoir d'erreur soulever,");
 		}
 		assertFalse(guest.mustEndALocationFirst());
 	}
