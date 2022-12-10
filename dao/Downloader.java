@@ -109,7 +109,7 @@ public class Downloader extends SwingWorker<String,String> {
 	}
 	
 	public String urlFile(String nature) throws IOException {
-		Init_URL_download Aprocess = new Init_URL_download(nature);
+		DaoInitUrlDownload Aprocess = new DaoInitUrlDownload(nature);
 		Path path = Aprocess.creerFichier(nature);
         File file = new File(path.toString());
  

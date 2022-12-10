@@ -17,10 +17,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
-public class Main {
+public class ScriptInitBDD {
 
 	public static void main(String[] args) throws Exception {
-		daoConnection aaa = new daoConnection();
+		DaoConnection aaa = new DaoConnection();
 		aaa.connectDB();
 		/*ScriptRunner sr = new ScriptRunner(aaa.base);
 		Reader reader = new BufferedReader(new FileReader("C:\\Users\\Kilian\\Documents\\al2000.sql"));
@@ -75,8 +75,8 @@ public class Main {
 			String imageURL = json_trs.translateImages(images.preparerProprietes(i));
 			i++;
 			
-			//push à la base de données
-			System.out.println("J'insère le film " + generalInformations[1] + " dont l'ID est " + generalInformations[0]);;
+			//push ï¿½ la base de donnï¿½es
+			System.out.println("J'insï¿½re le film " + generalInformations[1] + " dont l'ID est " + generalInformations[0]);;
 			pstmt = aaa.base.prepareStatement("INSERT INTO LESFILMS VALUES (?,?,?,?,?,?)");
 			pstmt.setInt(1, Integer.valueOf(generalInformations[0]));
 		    pstmt.setString(2, generalInformations[1]);

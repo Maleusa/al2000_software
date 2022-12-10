@@ -8,13 +8,13 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.Iterator;
 
-public class Init_URL_download {
+public class DaoInitUrlDownload {
 	
 	private String url;
 	private PrintWriter fis;
 	private Path path;
 	
-	public Init_URL_download(String nature) throws IOException {	
+	public DaoInitUrlDownload(String nature) throws IOException {	
 		FileSystem fs = FileSystems.getDefault();
 		path = fs.getPath("C:\\Users\\Kilian\\Documents\\"+ nature +".txt");
 		File file = new File(path.toString());

@@ -11,11 +11,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class execquerry {
+public class DaoExecQuery {
 	Connection base;
 	String querry;
 
-	public execquerry(Connection conn, String querry) {
+	public DaoExecQuery(Connection conn, String querry) {
 		base=conn;
 		this.querry=querry;
 	}
@@ -29,12 +29,14 @@ public class execquerry {
 			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 				Map<String, Object> curr = new HashMap<>();
 				String cType = rsmd.getColumnTypeName(i);
-				System.out.println("cType : "+cType);
 				switch (cType) {
 				case "DATE":
 					curr.put(rsmd.getColumnName(i), resultat.getDate(i));
 					break;
 				case "VARCHAR":
+					curr.put(rsmd.getColumnName(i), resultat.getString(i));
+					break;
+				case "VARCHAR2":
 					curr.put(rsmd.getColumnName(i), resultat.getString(i));
 					break;
 				case "INT":
@@ -49,7 +51,6 @@ public class execquerry {
 				r.add(curr);
 			}
 		}
-		
 		return r;
 	}
 }

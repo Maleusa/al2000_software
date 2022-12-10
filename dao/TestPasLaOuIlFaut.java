@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import fc.tag.ActorTag;
 import fc.tag.NameTag;
@@ -46,11 +47,11 @@ public class TestPasLaOuIlFaut {
 		
 		QueryBuilder qb = new QueryBuilder();
 		qb.getFilm(vraieList);
-		execquerry s = new execquerry(aaa.base, qb.getQuery());
-		ResultSet r = s.sendquerry();
-		while(r.next()) {
-			System.out.println(r.getString("title"));
-			System.out.println(r.getString("realisateur"));
+		DaoExecQuery s = new DaoExecQuery(aaa.base, qb.getQuery());
+		List<Map<String, Object>> r = new ArrayList<>(); 
+		r=s.sendquerry();
+		for (int i = 0; i < r.size(); i++) {
+			System.out.println(r.get(i));
 		}
 		aaa.disconnect();
 	}

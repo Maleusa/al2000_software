@@ -24,7 +24,7 @@ public class LocalDBconnection extends Thread{
 	
 	public void connect() throws SQLException {
 		String s1 = "alter session set container = al2000";
-		new execquerry(base, s1);
+		new DaoExecQuery(base, s1);
 		System.out.println("ça passe");
 	}
 	
