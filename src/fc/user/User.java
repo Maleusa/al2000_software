@@ -1,17 +1,14 @@
 package fc.user;
 
-import fc.Al2000;
-import fc.movie.FilmLouable;
+import fc.ComponentFC;
 
-public abstract class User {
-	protected UserInformations informations;
-	public boolean checkIdentity(String password) {
-		return informations.checkIdentity(password);
-	}
-	//public abstract void louerFilm(Al2000 al, FilmLouable film);
+public abstract class User implements ComponentFC{
+
+	protected int id;
+	protected String password;
+	protected Historic historic;
 	
-	public boolean logOut(Al2000 al) {
-		return al.logOut(this);
+	protected User(int id) {
+		this.id=id;
 	}
-	
 }
