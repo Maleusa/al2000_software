@@ -1,7 +1,7 @@
 package dao;
 
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Stub3 {
 
@@ -9,7 +9,11 @@ public class Stub3 {
 		
 	}
 	
-	public List<Map<String, Object>> cardInfo(int id){
+	public ArrayList<HashMap<String, String>> cardInfo(int id){
+		return null;
+	}
+	
+	public ArrayList<HashMap<String, String>> getStockBluRay(int id){
 		return null;
 	}
 }

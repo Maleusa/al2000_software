@@ -2,5 +2,5 @@ package fc;
 
 public interface MediatorFC {
 
-	public void notify(Object component);
+	public void notify(ComponentFC component);
 }

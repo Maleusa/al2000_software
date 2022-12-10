@@ -1,5 +1,7 @@
 package fc.user;
 
+import java.util.ArrayList;
+
 public class Guest extends User{
 
 	protected Guest(int id) {
@@ -8,19 +10,7 @@ public class Guest extends User{
 	}
 
 	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void destroy() {
+	public void update(String EVENT_TYPE, ArrayList<String> data) {
 		// TODO Auto-generated method stub
 		
 	}

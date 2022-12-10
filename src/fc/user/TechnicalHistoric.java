@@ -1,23 +1,12 @@
 package fc.user;
 
+import java.util.ArrayList;
+
 public class TechnicalHistoric extends Historic{
 
 	@Override
-	public void create() {
+	public void update(String EVENT_TYPE, ArrayList<String> data) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
