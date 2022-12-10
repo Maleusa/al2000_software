@@ -21,7 +21,6 @@ public class Historique {
 	
 	public void ajouterLocation(Date date, FilmLouable film) {
 		historique.put(date, film);
-		historique.
 	}
 
 }
