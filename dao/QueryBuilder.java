@@ -14,10 +14,36 @@ public class QueryBuilder {
 		
 	}
 	
-	
-	
-	public void getFilm(List<List<Tag>> list) {
+	public void getClientInfo(long carteBancaireId) {
 		
+		this.query = new StringBuilder("select * from ABONNE where hashed_card_id = '" + carteBancaireId +"'");
+		
+	}
+	
+	public void getClientInfo(int ClientId) {
+		
+		this.query = new StringBuilder("select * from Clients where IDE = '" + ClientId + "'");
+		
+	}
+	/** Builds the query for a film research. Take a list of list of Tags that's built depending on
+	 *  checked JRadioButtons in the tag research and the String researched. For each String and Tag searched,
+	 *  we check for the existence of a combination of <Tag><String>, and we select lines where we have a matching combo.
+	 *  
+	 *  For example, if the user enters "Batman George Clooney" in the search bar, and check the tags actor and title,
+	 *  the paramaters will be :
+	 *  <<NameTag Batman, ActorTag Batman> <NameTag George, ActorTag George> <NameTag Clooney, ActorTag Clooney>>
+	 *  and the query will be :
+	 *  "select * from LesFilms where
+	 *			(TITLE LIKE '%Batman%' OR ACTEURS LIKE '%Batman%')
+ 	 *		AND (TITLE LIKE '%George%' OR ACTEURS LIKE '%George%')
+ 	 *		AND (TITLE LIKE '%Clooney%' OR ACTEURS LIKE '%Clooney%')"
+ 	 *	We don't treat the case where a user misspel any of the Strings, we consider he knows Clooney is spelled this way
+	 * 
+	 * @param List of list of Tags
+	 * @return void
+	 */
+	public void getFilm(List<List<Tag>> list) {
+
 		this.query = new StringBuilder("select * from LesFilms where\n");
 		
 		for (List<Tag> list2 : list) {
@@ -48,47 +74,6 @@ public class QueryBuilder {
 	
 	public String getQuery () {
 		return this.query.toString();
-	}
-	
-	public void execQuerry() {
-		
-	}
-	
-	public static void main(String[] args) {
-		
-		NameTag t1 = new NameTag("Batman");
-		
-		ActorTag t2 = new ActorTag("Batman");
-		
-		NameTag t3 = new NameTag("George");
-		
-		ActorTag t4 = new ActorTag("George");
-		
-		NameTag t5 = new NameTag("Clooney");
-		
-		ActorTag t6 = new ActorTag("Clooney");
-		
-		List<Tag> list1 = new ArrayList<>();
-		list1.add(t1);
-		list1.add(t2);
-		
-		List<Tag> list2 = new ArrayList<>();
-		list2.add(t3);
-		list2.add(t4);
-		
-		List<Tag> list3 = new ArrayList<>();
-		list3.add(t5);
-		list3.add(t6);
-		
-		List<List<Tag>> vraiList = new ArrayList<>();
-		vraiList.add(list1);
-		vraiList.add(list2);
-		vraiList.add(list3);
-		
-		QueryBuilder qb = new QueryBuilder(vraiList);
-		String s = qb.getQuery();
-		System.out.println(s);
-		
 	}
 	
 }
