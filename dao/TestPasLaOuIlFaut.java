@@ -15,17 +15,17 @@ public class TestPasLaOuIlFaut {
 		LocalDBconnection aaa = new LocalDBconnection();
 		aaa.connect();
 		
-		NameTag t1 = new NameTag("Batman");
+		NameTag t1 = new NameTag("Mission");
 		
-		ActorTag t2 = new ActorTag("Batman");
+		ActorTag t2 = new ActorTag("Mission");
 		
-		NameTag t3 = new NameTag("George");
+		NameTag t3 = new NameTag("Tom");
 		
-		ActorTag t4 = new ActorTag("George");
+		ActorTag t4 = new ActorTag("Tom");
 		
-		NameTag t5 = new NameTag("Clooney");
+		NameTag t5 = new NameTag("Cruise");
 		
-		ActorTag t6 = new ActorTag("Clooney");
+		ActorTag t6 = new ActorTag("Cruise");
 		
 		List<Tag> list1 = new ArrayList<>();
 		list1.add(t1);
@@ -49,6 +49,8 @@ public class TestPasLaOuIlFaut {
 		ResultSet r = s.sendquerry();
 		while(r.next()) {
 			System.out.println(r.getString("title"));
+			System.out.println(r.getString("realisateur"));
 		}
+		aaa.disconnect();
 	}
 }

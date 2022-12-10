@@ -10,12 +10,13 @@ public class QueryBuilder {
 	
 	private StringBuilder query;
 	
-	private QueryBuilder() {
-		//A executer au lancement du bordel pour recup tout le stock de film physique
-		this.query = new StringBuilder("select * from LesFilms where LesFilms.IDE = ");
+	public QueryBuilder() {
+		
 	}
 	
-	public QueryBuilder(List<List<Tag>> list) {
+	
+	
+	public void getFilm(List<List<Tag>> list) {
 		
 		this.query = new StringBuilder("select * from LesFilms where\n");
 		
