@@ -39,12 +39,13 @@ public class TestPasLaOuIlFaut {
 		list3.add(t5);
 		list3.add(t6);
 		
-		List<List<Tag>> vraiList = new ArrayList<>();
-		vraiList.add(list1);
-		vraiList.add(list2);
-		vraiList.add(list3);
+		List<List<Tag>> vraieList = new ArrayList<>();
+		vraieList.add(list1);
+		vraieList.add(list2);
+		vraieList.add(list3);
 		
-		QueryBuilder qb = new QueryBuilder(vraiList);
+		QueryBuilder qb = new QueryBuilder();
+		qb.getFilm(vraieList);
 		execquerry s = new execquerry(aaa.base, qb.getQuery());
 		ResultSet r = s.sendquerry();
 		while(r.next()) {
