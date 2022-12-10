@@ -149,7 +149,7 @@ class GuestAbonnementTest {
 		FilmPhysique f2 = new FilmPhysique("bad boys 2");
 		assertTrue(guest.getLocations()[0]==null);
 		try {
-			guest.rendreFilmEndommage(al, f);
+			guest.rendreFilm(al, f, true);
 			fail("Guest ne doit pas pouvoir rendre le film puisque sa location est null");
 		} catch (RenduFilmException e) {
 
@@ -159,7 +159,7 @@ class GuestAbonnementTest {
 			assertTrue(guest.getLocations()[0]==null);
 			guest.getLocations()[0]=f;
 			try {
-				guest.rendreFilmEndommage(al, f);
+				guest.rendreFilm(al, f, true);
 				assertTrue(guest.getLocations()[0]==null);
 			} catch (RenduFilmException e1) {
 				fail("Ne devrait pas renvoyer d'exception car on rend f avec comme location le film f");
@@ -170,7 +170,7 @@ class GuestAbonnementTest {
 				 * On tente de rendre un film différent de celui de notre location en cours
 				 */
 				guest.getLocations()[0]=f;
-				guest.rendreFilmEndommage(al, f2);
+				guest.rendreFilm(al, f2, true);
 				fail("On rend le mauvais film : f2 au lieu de f");
 			} catch (RenduFilmException e1) {
 				assertTrue(guest.getLocations()[0].equals(f));
@@ -199,7 +199,7 @@ class GuestAbonnementTest {
 		guest.louerFilm(al, f);
 		assertTrue(guest.mustEndALocationFirst());
 		try {
-			guest.rendreFilmNonEndommage(al, f);
+			guest.rendreFilm(al, f, false);
 		} catch (RenduFilmException e) {
 			fail("Il ne devrait pas y avoir d'erreur soulever,");
 		}

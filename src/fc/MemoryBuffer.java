@@ -7,7 +7,7 @@ import fc.user.Abonnement;
 import fc.user.CarteAbonnement;
 import fc.user.User;
 
-public class MemoryBuffer extends Thread{
+public class MemoryBuffer{ // extends Thread{
 	private HashMap<Object,Integer> buffer;
 	
 	public MemoryBuffer() {

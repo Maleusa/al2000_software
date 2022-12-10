@@ -12,6 +12,7 @@ public class GuestAbonnement extends Abonnement {
 	
 	public GuestAbonnement(int id) {
 		this.id = id;
+		this.historique=new Historique();
 		this.locations = new FilmLouable[1];
 	}
 	@Override
@@ -34,7 +35,7 @@ public class GuestAbonnement extends Abonnement {
 		return locations[0]!=null;
 	}
 	@Override
-	public void rendreFilmNonEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
+	protected void rendreFilmNonEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
 		verificationCompatibiliteRendu(film);
 		locations[0]=null;
 		al.rendreFilmBonEtat(film);
@@ -42,7 +43,7 @@ public class GuestAbonnement extends Abonnement {
 		
 	}
 	@Override
-	public void rendreFilmEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
+	protected void rendreFilmEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
 		verificationCompatibiliteRendu(film);
 		locations[0]=null;
 		al.rendreFilmEndommage(film);

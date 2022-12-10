@@ -1,6 +1,7 @@
 package fc.user;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import fc.Al2000;
 import fc.Constants;
@@ -17,6 +18,7 @@ public class CarteAbonnement extends Abonnement {
 		this.id = id;
 		this.login=login;
 		this.password=password;
+		this.historique=new Historique();
 		this.locations=new FilmLouable[3];
 	}
 	
@@ -68,6 +70,8 @@ public class CarteAbonnement extends Abonnement {
 				break;
 			}
 		}
+//		Date date = new Date();
+//		this.historique.ajouterLocation(date, film);
 		al.modificationOnSubscriber(this);
 	}
 
@@ -79,15 +83,16 @@ public class CarteAbonnement extends Abonnement {
 
 
 	@Override
-	public void rendreFilmEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
+	protected void rendreFilmEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
 		verificationCompatibiliteRendu(film);
 		
 	}
 
 	@Override
-	public void rendreFilmNonEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
+	protected void rendreFilmNonEndommage(Al2000 al, FilmPhysique film) throws RenduFilmException {
 		verificationCompatibiliteRendu(film);
 		
 	}
+
 
 }

@@ -240,11 +240,6 @@ class CarteAbonnementTest {
 			assertTrue(client.moneyInTheBank==moneyOnCB-(prixFilmDemat-reductionAbonnement));
 		}else fail("Le test n'est pas effectué avec le bon budget/prix");
 		
-		/*
-		 * Il faut effectuer une batterie de tests sur l'historique des locations
-		 */
-		fail("L'historique n'a pas encore été implémenté");
-		
 	}
 	
 	/*
@@ -264,6 +259,7 @@ class CarteAbonnementTest {
 		c.setSolde(0);
 		for(FilmLouable f : c.getLocations()) f=null;
 		for(FilmLouable f : c.getLocations()) assertTrue(f==null);
+		FilmPhysique f = new FilmPhysique("The Rock");
 		
 		fail("Not yet Implemented");
 	}
@@ -302,6 +298,15 @@ class CarteAbonnementTest {
 	@Test
 	void testGestionCompte() {
 		fail("Not yet Implemented and multiple tests missing");
+	}
+	
+	/*
+	 * Il faut effectuer une batterie de tests sur l'historique des locations
+	 * Ces tests sont effectué au sein de la classe HistoriqueTest
+	 */
+	@Test
+	void testHistorique() {
+		fail("L'historique n'a pas encore été implémenté");
 	}
 	
 }
