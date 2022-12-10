@@ -19,7 +19,7 @@ public class NameTag extends Tag {
 
 	@Override
 	public String query() {
-		String s=new String("SELECT * from FILMS where NOM LIKE '%"+this.getTag()+"%'");
+		String s=new String("TITLE LIKE '%"+this.getTag()+"%'");
 		return s;
 	}
 }

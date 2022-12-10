@@ -17,7 +17,7 @@ public class DirectorTag extends Tag {
 
 	@Override
 	public String query() {
-		String s=new String("SELECT * from FILMS where REALISATEURS LIKE '%"+this.getTag()+"%'");
+		String s=new String("REALISATEUR LIKE '%"+this.getTag()+"%'");
 		return s;
 	}
 }

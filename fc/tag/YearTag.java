@@ -17,7 +17,7 @@ public class YearTag extends Tag {
 	}
 	@Override
 	public String query() {
-		String s=new String("SELECT * from FILMS where ANNEE LIKE '%"+this.getTag()+"%'");
+		String s = new String("ANNEESORTIE LIKE '%"+this.getTag()+"%'");
 		return s;
 	}
 }

@@ -19,7 +19,7 @@ public class DescriptionTag extends Tag {
 
 	@Override
 	public String query() {
-		String s=new String("SELECT * from FILMS where DESCRIPTION LIKE '%"+this.getTag()+"%'");
+		String s=new String("DESCRIPT LIKE '%"+this.getTag()+"%'");
 		return s;
 	}
 }

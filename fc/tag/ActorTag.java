@@ -18,7 +18,7 @@ public class ActorTag extends Tag {
 	}
 	@Override
 	public String query() {
-		String s=new String("SELECT * from FILMS where ACTEURS LIKE '%"+this.getTag()+"%'");
+		String s = new String("ACTEURS LIKE '%"+this.getTag()+"%'");
 		return s;
 	}
 
