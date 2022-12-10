@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class fenetre_welcome extends JPanel	 {
@@ -43,13 +44,13 @@ public class fenetre_welcome extends JPanel	 {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (e.getSource().equals(welcome)) {
-					fenetre_identification fcf = new fenetre_identification(jF);
+					//JOptionPane.showMessageDialog(jF, "Id cb : \nId Abo :");
+					
+					fenetre_reservation_film fcf = new fenetre_reservation_film(jF);
 					jF.setContentPane(fcf);
 					jF.repaint();
 					jF.revalidate();
 		        }
-
-				
 			}
     	});
 	}

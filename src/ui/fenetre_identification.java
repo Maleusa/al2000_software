@@ -51,8 +51,8 @@ public class fenetre_identification extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				
 				
-					fenetre_choix_film fcf = new fenetre_choix_film();
-					jF.setContentPane(fcf);
+					fenetre_recherche_film frf = new fenetre_recherche_film();
+					jF.setContentPane(frf);
 					jF.repaint();
 					jF.revalidate();
 		    
