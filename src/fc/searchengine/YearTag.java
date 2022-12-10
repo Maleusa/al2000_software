@@ -1,4 +1,4 @@
-package fc.tag;
+package fc.searchengine;
 
 import fc.constants.Priority;
 
