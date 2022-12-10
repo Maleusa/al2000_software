@@ -24,8 +24,8 @@ public class LocalDBconnection extends Thread{
 	
 	public void connect() throws SQLException {
 		String s1 = "alter session set container = al2000";
-		execquerry newquerry= new execquerry(base, s1);
-		System.out.println("ça passe");
+		new execquerry(base, s1);
+		System.out.println("Ã§a passe");
 	}
 	
 	public void disconnect() throws SQLException {

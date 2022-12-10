@@ -9,14 +9,14 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
-public class daoConnection extends Thread{
+public class daoConnection{
 
 	static Session session;
 	String sshUser;	// strappah
 	String sshPassword;	//Pa$$word
 	String sshHost = "im2ag-mandelbrot.univ-grenoble-alpes.fr";
 	int sshPort =22;
-	int nLocalPort=38941;
+	int nLocalPort=38912;
 	int nRemotePort = 1521;
 	Connection base;
 
@@ -33,7 +33,6 @@ public class daoConnection extends Thread{
 			String strRemoteHost, int nLocalPort, int nRemotePort) throws JSchException {
 		final JSch jsch = new JSch();
 		session = jsch.getSession(sshUser, sshHost, 22);
-		session.setTimeout(4000);
 		session.setPassword(sshPassword);
 		try {
 			final Properties config = new Properties();
@@ -59,7 +58,7 @@ public class daoConnection extends Thread{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			session =doSshTunnel(sshUser, sshPassword, sshHost, sshPort, strRemoteHost, nLocalPort, nRemotePort);
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			base = DriverManager.getConnection("jdbc:oracle:thin:@localhost:"+nLocalPort+":im2ag", sshUser, "94bf0ae10f"); // connexion
+			base = DriverManager.getConnection("jdbc:oracle:thin:@localhost:"+nLocalPort+":im2ag", sshUser, "942e7b79fc"); // connexion 942e7b79fc  94bf0ae10f
 			base.setAutoCommit(false);
 			System.out.println("base connected");
 
@@ -82,7 +81,4 @@ public class daoConnection extends Thread{
 		session.disconnect();// fermeture de la connexion
 	}
 
-	public void run(){  
-		this.connectDB();
-	}  
 }
