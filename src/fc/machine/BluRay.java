@@ -33,6 +33,10 @@ public class BluRay implements ComponentFC, Rentable {
 	public void setState(MovieState state) {
 		this.state = state;
 	}
+	@Override
+	public void louer(Machine al2000) {
+		al2000.ouvrirPince();
+	}
 
 	
 }
