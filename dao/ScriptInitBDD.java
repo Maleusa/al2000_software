@@ -20,11 +20,11 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 public class ScriptInitBDD {
 
 	public static void main(String[] args) throws Exception {
-		DaoConnection aaa = DaoConnection.getInstance();
-		aaa.connectDB();
-		/*ScriptRunner sr = new ScriptRunner(aaa.base);
+		LocalDBconnection aaa = LocalDBconnection.getInstance();
+		aaa.connect();
+		ScriptRunner sr = new ScriptRunner(aaa.getBase());
 		Reader reader = new BufferedReader(new FileReader("C:\\Users\\Kilian\\Documents\\al2000.sql"));
-		sr.runScript(reader);*/
+		sr.runScript(reader);
 		//get all films id, titles, desc, release date
 		Downloader downloader = new Downloader();
 		String foldernametitle = downloader.urlFile("title");
@@ -77,18 +77,19 @@ public class ScriptInitBDD {
 			
 			//push � la base de donn�es
 			System.out.println("J'ins�re le film " + generalInformations[1] + " dont l'ID est " + generalInformations[0]);;
-			pstmt = aaa.base.prepareStatement("INSERT INTO LESFILMS VALUES (?,?,?,?,?,?)");
+			pstmt = aaa.getBase().prepareStatement("INSERT INTO LESFILMS VALUES (?,?,?,?,?,?,?)");
 			pstmt.setInt(1, Integer.valueOf(generalInformations[0]));
 		    pstmt.setString(2, generalInformations[1]);
 		    pstmt.setString(3, realList);
 		    pstmt.setString(4, actorsList);
 		    pstmt.setString(5, generalInformations[2]);
 		    pstmt.setInt(6, anneeDate);
+		    pstmt.setString(7, imageURL);
 		    pstmt.executeUpdate();
-			aaa.base.commit();
+			aaa.getBase().commit();
 			pstmt.clearParameters();
-		}
 			
-		aaa.disconnectDB();
+		}
+		aaa.disconnect();
 	}
 }

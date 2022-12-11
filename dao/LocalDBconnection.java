@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LocalDBconnection extends Thread{
+	private static LocalDBconnection instance;
 	static Connection base;
 	String database="al2000";
 
@@ -21,11 +22,21 @@ public class LocalDBconnection extends Thread{
 		base.setAutoCommit(false);
 		System.out.println("base connected");
 	}
+	public static LocalDBconnection getInstance() throws Exception {
+		if (LocalDBconnection.instance == null) {
+			LocalDBconnection.instance = new LocalDBconnection();
+		}
+		return LocalDBconnection.instance;
+	}
 	
 	public void connect() throws SQLException {
 		String s1 = "alter session set container = al2000";
 		new DaoExecQuery(base, s1);
 		System.out.println("ça passe");
+	}
+	
+	public Connection getBase() {
+		return this.base;
 	}
 	
 	public void disconnect() throws SQLException {
