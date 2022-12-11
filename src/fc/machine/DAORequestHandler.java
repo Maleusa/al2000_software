@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import fc.user.User;
+import fc.ComponentFC;
 import fc.searchengine.*;
 
 /*
  * Our Interface between the FC and the DAO part of the project
  * 
  */
-public interface DAORequestHandler {
+public interface DAORequestHandler extends ComponentFC {
 
 	/*
 	 * Return the list of physical movies (BluRay) inside the Al2000 given 

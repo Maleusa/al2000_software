@@ -16,7 +16,7 @@ import fc.user.User;
  * An implementation of our DAORequestHandler. Take the [DAOLinkerName] in attribute
  * Is dependant from the return type from [DAOLinkerName]
  */
-public class DAORequestHandlerMachine implements DAORequestHandler, ComponentFC {
+public class DAORequestHandlerMachine implements DAORequestHandler {
 	
 	private Stub3 dao;
 	public DAORequestHandlerMachine() {
@@ -40,21 +40,7 @@ public class DAORequestHandlerMachine implements DAORequestHandler, ComponentFC 
 		}
 		return stock;
 	}
-
-	/*
-	 * Pour l'instant : cet objet sera en écoute de l'ui et lui donnera les informations nécessaires
-	 */
-	@Override
-	public User getUser(int userID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	@Override
-	public void update(String EVENT_TYPE, ArrayList<String> data) {
-		// TODO Auto-generated method stub
-	}
-
 	@Override
 	public ArrayList<QRCode> getRequestedDigitalMovies(HashMap<String, ArrayList<Tag>> request) {
 		ArrayList<QRCode> qrCodes = new ArrayList<QRCode>();
@@ -79,12 +65,28 @@ public class DAORequestHandlerMachine implements DAORequestHandler, ComponentFC 
 		movie.setActors(movieInformations.get("actors"));
 		movie.setDescription(movieInformations.get("description"));
 		try {
-			movie.setRelease(new SimpleDateFormat("dd/MM/yyyy").parse(movieInformations.get("date")));
+			movie.setRelease(new SimpleDateFormat("yyyy-mm-dd").parse(movieInformations.get("date")));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		return movie;
 	}
+
+	/*
+	 * Pour l'instant : cet objet sera en écoute de l'ui et lui donnera les informations nécessaires
+	 */
+	@Override
+	public User getUser(int userID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public void update(String EVENT_TYPE, ArrayList<String> data) {
+		// TODO Auto-generated method stub
+	}
+
+	
 	
 	
 }

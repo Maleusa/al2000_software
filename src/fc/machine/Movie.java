@@ -9,6 +9,7 @@ public class Movie {
 	private String actors;
 	private String description;
 	private Date release;
+	private String url;
 	
 	public Movie() {
 		
@@ -42,5 +43,11 @@ public class Movie {
 	}
 	public void setRelease(Date release) {
 		this.release = release;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url=url;
 	}
 }

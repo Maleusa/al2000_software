@@ -68,7 +68,7 @@ public class Machine implements ComponentFC {
 	 */
 	public void update(String EVENT_TYPE, ArrayList<String> data) {
 		switch(EVENT_TYPE) {
-		case "CONNEXION_EVENT_SUB_TYPE":
+		case "CONNEXION_SUB_EVENT_TYPE":
 			currentUser = daoRequestHandler.getUser(Integer.parseInt(data.get(0))); //BOF BOF
 			break;
 		default:
