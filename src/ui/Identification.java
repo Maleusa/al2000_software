@@ -14,44 +14,44 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 
 
-public class fenetre_identification extends JPanel{
+public class Identification extends JPanel{
 	
-	JLabel label_sub = new JLabel("Connectez vous en insérant votre carte ou appuyez sur le bouton SUB");
-	JLabel label_louer = new JLabel("Tu peux aussi louer ton film sans t'abonner en cliquand sur 'Louer'");
+	JLabel label_sub = new JLabel("Connect by inserting your card or press the SUB button");
+	JLabel label_rent = new JLabel("You can also rent your film without subscribing by clicking on 'Rent''");
 	JButton button_subscribed = new JButton("Sub");
-	JButton button_louer = new JButton("Louer");
+	JButton button_rent = new JButton("Louer");
 	JPanel panel = new JPanel();
 	JFrame jF;
 	
-	public fenetre_identification(JFrame j) {
+	public Identification(JFrame j) {
 		super.setLayout(new BorderLayout());
 		super.setBackground(Color.BLACK);
 		
 		panel.setBackground(Color.BLACK);
 		panel.setLayout(new GridLayout(2,1));
 		label_sub.setFont(new Font("Verdana", Font.PLAIN, 28));
-		label_louer.setFont(new Font("Verdana", Font.PLAIN, 28));
-		label_louer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		label_rent.setFont(new Font("Verdana", Font.PLAIN, 28));
+		label_rent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		label_sub.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		label_sub.setForeground(Color.white);
-		label_louer.setForeground(Color.WHITE);
+		label_rent.setForeground(Color.WHITE);
 		
-		super.add(button_louer,BorderLayout.SOUTH);
+		super.add(button_rent,BorderLayout.SOUTH);
 		super.add(panel, BorderLayout.NORTH);
-		super.add(label_louer, BorderLayout.CENTER);
+		super.add(label_rent, BorderLayout.CENTER);
 		
 		panel.add(label_sub);
 		panel.add(button_subscribed);
 		
 		jF=j;
 		
-		button_louer.addActionListener(new ActionListener(){
+		button_rent.addActionListener(new ActionListener(){
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
 				
-					fenetre_recherche_film frf = new fenetre_recherche_film();
+					ResearchMovie frf = new ResearchMovie();
 					jF.setContentPane(frf);
 					jF.repaint();
 					jF.revalidate();
@@ -66,7 +66,7 @@ public class fenetre_identification extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-					fenetre_inscription fcf = new fenetre_inscription(jF);
+					Inscription fcf = new Inscription(jF);
 					jF.setContentPane(fcf);
 					jF.repaint();
 					jF.revalidate();				

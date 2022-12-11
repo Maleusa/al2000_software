@@ -1,6 +1,4 @@
 package ui;
-import java.awt.*;
-import javax.swing.*;
 import java.awt.event.*;
 public class Interaction implements MouseListener {
 	
