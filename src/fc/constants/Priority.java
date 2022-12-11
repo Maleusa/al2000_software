@@ -1,5 +1,8 @@
 package fc.constants;
 
+/*
+ * Those are the priority constants for the tag
+ */
 public final class Priority {
 	public final static int UN=1;
 	public final static int DEUX=2;

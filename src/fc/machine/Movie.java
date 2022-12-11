@@ -1,5 +1,9 @@
 package fc.machine;
+
 import fc.searchengine.*;
+import java.util.Date;
+
+
 public class Movie {
 	private NameTag name;
 	private ActorTag actors;
@@ -7,6 +11,9 @@ public class Movie {
 	private GenreTag genre;
 	private ClassificationTag classification;
 	private YearTag year;
+  private String url;
+  
+  
 	public Movie(String name,String actors,String directors,String genre,String classification,String year) {
 		this.name=new NameTag(name);
 		this.actors=new ActorTag(actors);
@@ -17,7 +24,11 @@ public class Movie {
 
 
 	}
-
+  public Movie() {
+		
+	}
+  
+  
 	public boolean containsTag(Tag tag) {
 		if(tag.similareTo(actors)||tag.similareTo(classification)||tag.similareTo(directors)||tag.similareTo(genre)||tag.similareTo(name)||tag.similareTo(year)) return true;
 		else return false;
@@ -32,4 +43,5 @@ public class Movie {
 		else return year.getPrio();
 	}
 
-}
+	
+	
