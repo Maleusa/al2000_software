@@ -24,9 +24,33 @@ public class Machine implements ComponentFC {
 	}
 	
 	public void ouvrirPince() {
-		System.out.println("Les pinces s'ouvres, vous récupérer.");
+		System.out.println("Les pinces s'ouvres, vous rï¿½cupï¿½rer.");
 	}
 	
+	public BluRayStock getStock() {
+		return stock;
+	}
+
+	public void setStock(BluRayStock stock) {
+		this.stock = stock;
+	}
+
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
+	}
+
+	public DAORequestHandler getDaoRequestHandler() {
+		return daoRequestHandler;
+	}
+
+	public void setDaoRequestHandler(DAORequestHandler daoRequestHandler) {
+		this.daoRequestHandler = daoRequestHandler;
+	}
+
 	public void ouvrirQrCode() {
 		System.out.println("Le QR code sort de la machine.");
 	}
@@ -42,7 +66,7 @@ public class Machine implements ComponentFC {
 
 	@Override
 	/*
-	 * Machine n'est subscribe qu'au évènements de type CONNEXION_EVENT_TYPE qui contient
+	 * Machine n'est subscribe qu'au ï¿½vï¿½nements de type CONNEXION_EVENT_TYPE qui contient
 	 * comme DATA : Id_abo 
 	 */
 	public void update(String EVENT_TYPE, ArrayList<String> data) {
