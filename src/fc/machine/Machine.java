@@ -9,6 +9,11 @@ import fc.MediatorFC;
 import fc.user.User;
 import ui.listener.UIObserver;
 
+/*
+ * Represent our Al2000, in concrete, this code should be implement in each Al2000 machine.
+ * Machine is a Singleton (there is only one instance of Machine at each time on a Al2000).
+ * Contain a BluRayStock, the current user, a DAORequestHandler and a UIObserver [à compléter si besoin]
+ */
 public class Machine implements ComponentFC {
 	
 	private int idMachine;
@@ -19,8 +24,13 @@ public class Machine implements ComponentFC {
 	private UIObserver uiObserver; 
 	
 	private Machine() {
-		idMachine = 1; //SCANF 
+		idMachine = 1; //ScanF 
 		stock = new BluRayStock();
+	}
+	
+	public static Machine getInstance() {
+		if(instance==null)  instance= new Machine();
+		return instance;
 	}
 	
 	public void setUIObserver(UIObserver uiObserver) {
@@ -34,17 +44,13 @@ public class Machine implements ComponentFC {
 		 */
 		uiObserver.subscribed("CONNEXION_EVENT_SUB_TYPE", this);
 	}
-	public void ouvrirPince() {
+	
+	public void openBluRayExit() {
 		System.out.println("Les pinces s'ouvres, vous récupérer.");
 	}
 	
-	public void ouvrirQrCode() {
+	public void openQRCodeExit() {
 		System.out.println("Le QR code sort de la machine.");
-	}
-	
-	public static Machine getInstance() {
-		if(instance==null)  instance= new Machine();
-		return instance;
 	}
 	
 	public void setDAORequestHandler(DAORequestHandler daoRequestHandler) {

@@ -28,7 +28,7 @@ public class QRCode implements ComponentFC, Rentable  {
 
 	@Override
 	public void louer(Machine al2000) {
-		al2000.ouvrirQrCode();
+		al2000.openQRCodeExit();
 	}
 
 }

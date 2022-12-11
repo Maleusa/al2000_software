@@ -12,6 +12,10 @@ import fc.constants.MovieState;
 import fc.searchengine.Tag;
 import fc.user.User;
 
+/*
+ * An implementation of our DAORequestHandler. Take the [DAOLinkerName] in attribute
+ * Is dependant from the return type from [DAOLinkerName]
+ */
 public class DAORequestHandlerMachine implements DAORequestHandler, ComponentFC {
 	
 	private Stub3 dao;

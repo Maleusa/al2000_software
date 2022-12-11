@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import fc.ComponentFC;
 import fc.constants.MovieState;
 
+/*
+ * A BluRay is a Rentable object wich contains a movie, an id and a state (cf MovieState)
+ */
 public class BluRay implements ComponentFC, Rentable {
 
 	private Movie movie;
@@ -35,7 +38,7 @@ public class BluRay implements ComponentFC, Rentable {
 	}
 	@Override
 	public void louer(Machine al2000) {
-		al2000.ouvrirPince();
+		al2000.openBluRayExit();
 	}
 
 	
