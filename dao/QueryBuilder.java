@@ -51,8 +51,7 @@ public class QueryBuilder {
 	 */
 	public void getDigitalMovies(List<List<Tag>> list) {
 
-		this.query = new StringBuilder("select * from LesFilms where\n");
-		
+		this.query = new StringBuilder("select * from LesFilms where\n");	
 		for (List<Tag> list2 : list) {
 			
 			if (!(list.get(0).equals(list2))) {
