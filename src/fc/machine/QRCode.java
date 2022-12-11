@@ -21,6 +21,7 @@ public class QRCode implements ComponentFC, Rentable  {
 		return qrCode;
 	}
 	@Override
+
 	public void update(String EVENT_TYPE, ArrayList<String> data) {
 		// TODO Auto-generated method stub
 		
@@ -30,5 +31,6 @@ public class QRCode implements ComponentFC, Rentable  {
 	public void louer(Machine al2000) {
 		al2000.openQRCodeExit();
 	}
+
 
 }

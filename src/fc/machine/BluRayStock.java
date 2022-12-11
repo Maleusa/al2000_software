@@ -1,7 +1,7 @@
 package fc.machine;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+
 import fc.constants.*;
 import fc.ComponentFC;
 
@@ -11,6 +11,10 @@ import fc.ComponentFC;
  * blurays that are available, thoses that are rented and the unverified's ones
  */
 public class BluRayStock implements ComponentFC {
+
+
+
+	
 
 	private ArrayList<BluRay> rentableStock; //Max Size = 100
 	private ArrayList<BluRay> rentedStock;
@@ -48,9 +52,26 @@ public class BluRayStock implements ComponentFC {
 	public ArrayList<BluRay> getRentableMovies(){
 		return rentableStock;
 	}
-	@Override
+
 	public void update(String EVENT_TYPE, ArrayList<String> data) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	
+	public ArrayList<BluRay> getRentableStock() {
+		return rentableStock;
+	}
+
+	public void setRentableStock(ArrayList<BluRay> rentableStock) {
+		this.rentableStock = rentableStock;
+	}
+
+	public ArrayList<BluRay> getUnverifiedStock() {
+		return unverifiedStock;
+	}
+	
+	public void setUnverifiedStock(ArrayList<BluRay> unverifiedStock) {
+		this.unverifiedStock = unverifiedStock;
 	}
 }

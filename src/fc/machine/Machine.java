@@ -12,12 +12,12 @@ import ui.listener.UIObserver;
 /*
  * Represent our Al2000, in concrete, this code should be implement in each Al2000 machine.
  * Machine is a Singleton (there is only one instance of Machine at each time on a Al2000).
- * Contain a BluRayStock, the current user, a DAORequestHandler and a UIObserver [à compléter si besoin]
+ * Contain a BluRayStock, the current user, a DAORequestHandler and a UIObserver [Ã  complÃ©ter si besoin]
  */
 public class Machine implements ComponentFC {
 	
 	private int idMachine;
-	private static Machine instance; //SINGLETON : pas sûr car si on veut faire plusieurs machine : risque de sauter
+	private static Machine instance; //SINGLETON : pas sÃ»r car si on veut faire plusieurs machine : risque de sauter
 	private BluRayStock stock;
 	private User currentUser;
 	private DAORequestHandler daoRequestHandler;
@@ -28,7 +28,32 @@ public class Machine implements ComponentFC {
 		stock = new BluRayStock();
 	}
 	
-	public static Machine getInstance() {
+	
+	public BluRayStock getStock() {
+		return stock;
+	}
+
+	public void setStock(BluRayStock stock) {
+		this.stock = stock;
+	}
+
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
+	}
+
+	public DAORequestHandler getDaoRequestHandler() {
+		return daoRequestHandler;
+	}
+
+	public void setDaoRequestHandler(DAORequestHandler daoRequestHandler) {
+		this.daoRequestHandler = daoRequestHandler;
+	}
+
+  public static Machine getInstance() {
 		if(instance==null)  instance= new Machine();
 		return instance;
 	}
@@ -40,13 +65,14 @@ public class Machine implements ComponentFC {
 	public void subscribeAllListener() {
 		/*
 		 * TO DO : subscribe all the component to the observer
-		 * peut être un peu trop de résponsabilité
+		 * peut Ãªtre un peu trop de rÃ©sponsabilitÃ©
 		 */
 		uiObserver.subscribed("CONNEXION_EVENT_SUB_TYPE", this);
+
 	}
 	
 	public void openBluRayExit() {
-		System.out.println("Les pinces s'ouvres, vous récupérer.");
+		System.out.println("Les pinces s'ouvres, vous rÃ©cupÃ©rer.");
 	}
 	
 	public void openQRCodeExit() {
@@ -63,7 +89,7 @@ public class Machine implements ComponentFC {
 	}
 	@Override
 	/*
-	 * Machine n'est subscribe qu'au évènements de type CONNEXION_EVENT_TYPE qui contient
+	 * Machine n'est subscribe qu'au Ã¯Â¿Â½vÃ¯Â¿Â½nements de type CONNEXION_EVENT_TYPE qui contient
 	 * comme DATA : Id_abo 
 	 */
 	public void update(String EVENT_TYPE, ArrayList<String> data) {
@@ -79,8 +105,8 @@ public class Machine implements ComponentFC {
 	public void launch() {
 		/*
 		 * Open the first Window
-		 * En théorie, Al ne s'éteint jamais, une fois launch le programme tourne jusqu'à la venue d'un technicien (la partie technicien 
-		 * n'étant pas encore implémenter, on verra plus tard), pour l'instant, il appuie sur le boutton on/off à l'arrière : On ferme javaSwing
+		 * En thÃ©orie, Al ne s'Ã©teint jamais, une fois launch le programme tourne jusqu'Ã  la venue d'un technicien (la partie technicien 
+		 * n'Ã©tant pas encore implÃ©menter, on verra plus tard), pour l'instant, il appuie sur le boutton on/off Ã  l'arriÃ¨re : On ferme javaSwing
 		 */
 	}
 

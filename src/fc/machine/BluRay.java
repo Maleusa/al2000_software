@@ -13,11 +13,7 @@ public class BluRay implements ComponentFC, Rentable {
 	private Movie movie;
 	private int id;
 	private MovieState state;
-	@Override
-	public void update(String EVENT_TYPE, ArrayList<String> data) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	public Movie getMovie() {
 		return movie;
 	}
@@ -36,6 +32,11 @@ public class BluRay implements ComponentFC, Rentable {
 	public void setState(MovieState state) {
 		this.state = state;
 	}
+
+	public void update(String EVENT_TYPE, ArrayList<String> data) {
+		// TODO Auto-generated method stub
+		
+
 	@Override
 	public void louer(Machine al2000) {
 		al2000.openBluRayExit();
