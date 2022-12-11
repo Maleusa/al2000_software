@@ -14,5 +14,5 @@ public class Technical extends User {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

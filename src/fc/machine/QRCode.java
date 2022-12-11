@@ -4,13 +4,17 @@ import java.util.ArrayList;
 
 import fc.ComponentFC;
 
-public class QRCode implements ComponentFC, Rentable  {
+public class QRCode implements Rentable  {
 
 	private Movie movie;
 	private String qrCode;
 	
 	public QRCode() {
 		
+	}
+	
+	public Movie getMovie() {
+		return movie;
 	}
 	
 	public void setMovie(Movie movie) {
@@ -21,15 +25,20 @@ public class QRCode implements ComponentFC, Rentable  {
 		return qrCode;
 	}
 	@Override
-
+	/*
+	 * EVENT_TYPE :
+	 * 	RENT_QRCODE_EVENT_TYPE
+	 */
 	public void update(String EVENT_TYPE, ArrayList<String> data) {
-		// TODO Auto-generated method stub
-		
+		switch(EVENT_TYPE) {
+		case "RENT_QRCODE_EVENT_TYPE":
+			int qr = (int)(Math.random()*200);
+			qrCode = ""+qr;
+			break;
+		default:
+			break;
 	}
-
-	@Override
-	public void louer(Machine al2000) {
-		al2000.openQRCodeExit();
+	
 	}
 
 

@@ -9,7 +9,7 @@ import ui.SearchRepresentation;
 import ui.StockRepresentation;
 import ui.stateMachine.StateMachine;
 
-public class SearchToStateMachine  implements MediatorFC{
+public class FCToStateMachine  implements MediatorFC{
 	protected SearchEngine searchEngine;
 	protected StateMachine stateMachine;
 

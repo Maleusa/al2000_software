@@ -6,18 +6,23 @@ import ui.SearchRepresentation;
 import ui.StockRepresentation;
 import ui.UiRepresentation;
 import ui.UserRepresentation;
+import ui.listener.Observer;
 import ui.listener.UIObserver;
 
 /*
  * TO DO : MAchine � �tat et M�mento
  */
 public class StateMachine {
+	
 	protected UiRepresentation user;
 	protected UiRepresentation bluRayStock;
 	protected UiRepresentation searchResult;
+	
 	protected ArrayList<Page> previousState;
 	protected Page currentPage;
-	protected UIObserver observer;
+	
+	protected Observer observer;
+	
 	public static String USER_UPDATE="USER_UPDATE";
 	public static String STOCK_UPDATE="STOCK_UPDATE";
 	public static String SEARCH_UPDATE="SEARCH_UPDATE";
@@ -54,8 +59,11 @@ public class StateMachine {
 		currentPage.changeState(EVENT);
 	}
 	
+	public void setUIObserver(Observer observer) {
+		this.observer=observer;
+	}
 	
-	public void update(String EVENT,ArrayList<String> data) {
+	public void notifyObserver(String EVENT,ArrayList<String> data) {
 			observer.notify(EVENT, data);
 	}
 	

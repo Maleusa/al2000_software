@@ -48,19 +48,7 @@ public class DAORequestHandlerExample implements DAORequestHandler{
 		return null;
 	}
 
-	/*
-	 * Partie écoute de l'ui
-	 * Handle the CONNEXION_WITH_CB_EVENT_TYPE of event which send a list of String with : 
-	 */
-	@Override
-	public void update(String EVENT_TYPE, ArrayList<String> data) {
-		switch(EVENT_TYPE) {
-		case "CONNEXION_WITH_CB_EVENT_TYPE":
-			break;
-		default:
-			break;
-		}
-	}
+
 	
 	private ArrayList<Movie> movieCreator(){
 		ArrayList<Movie> movies = new ArrayList<Movie>();
@@ -69,17 +57,17 @@ public class DAORequestHandlerExample implements DAORequestHandler{
 		Movie movietherock = new Movie();
 		
 		moviethebatman.setTitle("The batman");
-		moviethebatman.setDirector("Matt Reeves");
+		moviethebatman.setDirectors("Matt Reeves");
 		moviethebatman.setActors("Robert Pattinson;Zoë Kravitz;Paul Dano");
 		moviethebatman.setDescription("The batman, il bien et dure trois heures.");
 		
 		moviebadboys.setTitle("Bad boys");
-		moviebadboys.setDirector("Micheal Bay");
+		moviebadboys.setDirectors("Micheal Bay");
 		moviebadboys.setActors("Will Smith;Martin Lawrence;Joe Pantaliano");
 		moviebadboys.setDescription("Bad boys, bad boys what you gonna do when ...");
 		
 		movietherock.setTitle("The Rock");
-		movietherock.setDirector("Micheal Bay");
+		movietherock.setDirectors("Micheal Bay");
 		movietherock.setActors("Sean Connery;Nicolas Cage;Ed Harris");
 		movietherock.setDescription("The Rock, le meilleur film de Micheal Bay, une suite de James Bond ??");
 		
@@ -92,6 +80,12 @@ public class DAORequestHandlerExample implements DAORequestHandler{
 		
 		
 		return movies;
+	}
+
+	@Override
+	public User getUserFromCB(int numCB) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

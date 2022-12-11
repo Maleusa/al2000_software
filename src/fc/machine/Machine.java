@@ -6,8 +6,11 @@ import java.util.Scanner;
 import dao.Stub3;
 import fc.ComponentFC;
 import fc.MediatorFC;
+import fc.searchengine.SearchEngine;
 import fc.user.User;
+import ui.listener.Observer;
 import ui.listener.UIObserver;
+import ui.stateMachine.StateMachine;
 
 /*
  * Represent our Al2000, in concrete, this code should be implement in each Al2000 machine.
@@ -19,15 +22,54 @@ public class Machine implements ComponentFC {
 	private int idMachine;
 	private static Machine instance; //SINGLETON : pas sûr car si on veut faire plusieurs machine : risque de sauter
 	private BluRayStock stock;
+	private QRCodeStock searchResultStock;
 	private User currentUser;
 	private DAORequestHandler daoRequestHandler;
-	private UIObserver uiObserver; 
+	private Observer uiObserver; 
+	private SearchEngine searchEngine;
+	private MediatorFC mediatorFC;
+	//private EventListenerDAO
 	
 	private Machine() {
 		idMachine = 1; //ScanF 
 		stock = new BluRayStock();
+		searchResultStock = new QRCodeStock();
 	}
 	
+	
+	
+	public MediatorFC getMediatorFC() {
+		return mediatorFC;
+	}
+
+
+
+	public void setMediatorFC(MediatorFC mediatorFC) {
+		this.mediatorFC = mediatorFC;
+	}
+
+
+
+	public SearchEngine getSearchEngine() {
+		return searchEngine;
+	}
+
+
+
+	public void setSearchEngine(SearchEngine searchEngine) {
+		this.searchEngine = searchEngine;
+	}
+
+
+
+	public QRCodeStock getSearchResultStock() {
+		return searchResultStock;
+	}
+
+
+	public void setSearchResultStock(QRCodeStock searchResultStock) {
+		this.searchResultStock = searchResultStock;
+	}
 	
 	public BluRayStock getStock() {
 		return stock;
@@ -67,16 +109,17 @@ public class Machine implements ComponentFC {
 		 * TO DO : subscribe all the component to the observer
 		 * peut être un peu trop de résponsabilité
 		 */
-		uiObserver.subscribed("CONNEXION_EVENT_SUB_TYPE", this);
+		//TODO uiObserver.subscribe("CONNEXION_EVENT_SUB_TYPE", this);
+		
 
 	}
 	
-	public void openBluRayExit() {
-		System.out.println("Les pinces s'ouvres, vous récupérer.");
+	public void openBluRayExit(BluRay bluray) {
+		System.out.println("Les pinces s'ouvres, vous récupérer : "+bluray.getMovie().getTitle());
 	}
 	
-	public void openQRCodeExit() {
-		System.out.println("Le QR code sort de la machine.");
+	public void openQRCodeExit(QRCode qrCode) {
+		System.out.println("Le QR code sort de la machine : "+qrCode.getQRCode());
 	}
 	
 	public void setDAORequestHandler(DAORequestHandler daoRequestHandler) {
@@ -91,14 +134,49 @@ public class Machine implements ComponentFC {
 	/*
 	 * Machine n'est subscribe qu'au ï¿½vï¿½nements de type CONNEXION_EVENT_TYPE qui contient
 	 * comme DATA : Id_abo 
+	 * 
+	 * EVENT_TYPE :
+	 * 	GUEST_IN_EVENT_TYPE (data = numCB)
+	 * 	SIGN_IN_EVENT_TYPE (data = numAbo)
+	 * 	SIGN_UP_EVENT_TYPE (data = all signUp info)
+	 * 	SIGN_OUT_EVENT_TYPE
+	 * 	RENT_PRINTQRCODE_EVENT_TYPE
+	 * 	RENT_FREEBLURAY_EVENT_TYPE
+	 * 	
+	 * 
 	 */
 	public void update(String EVENT_TYPE, ArrayList<String> data) {
 		switch(EVENT_TYPE) {
-		case "CONNEXION_SUB_EVENT_TYPE":
-			currentUser = daoRequestHandler.getUser(Integer.parseInt(data.get(0))); //BOF BOF
-			break;
-		default:
-			break;
+			case "GUEST_IN_EVENT_TYPE":
+				currentUser = daoRequestHandler.getUserFromCB(Integer.parseInt(data.get(0)));
+				mediatorFC.notify(StateMachine.USER_UPDATE, currentUser);
+				break;
+			case "SIGN_IN_EVENT_TYPE":
+				currentUser = daoRequestHandler.getUser(Integer.parseInt(data.get(0))); //BOF BOF
+				mediatorFC.notify(StateMachine.USER_UPDATE, currentUser);
+				//TODO uiObserver.subscribe(EVENT_TYPE, currentUser)
+				break;
+			case "SIGN_UP_EVENT_TYPE":
+				//daoEventManager.notify(SIGNUP_EVENT, data)
+				update("SIGN_OUT_EVENT_TYPE", data);
+				break;
+			case "SIGN_OUT_EVENT_TYPE":
+				System.out.println("Here is your card"+currentUser.getCardNumber()+".");
+				//Pour chaque abo du user on l'unsubscribe
+				currentUser = null;
+				uiObserver.unsubscribe("RENT_QRCODE_EVENT_TYPE", searchResultStock);
+				searchResultStock = null;
+				break;
+			case "RENT_PRINTQRCODE_EVENT_TYPE":
+				openQRCodeExit(searchResultStock.getRentableMovies().get(0));
+				update("SIGN_OUT_EVENT_TYPE", data);
+				break;
+			case "RENT_FREEBLURAY_EVENT_TYPE":
+				openBluRayExit(stock.getRentableBluRay(Integer.parseInt(data.get(0))));
+				update("SIGN_OUT_EVENT_TYPE", data);
+				break;
+			default:
+				break;
 		}
 	}
 	

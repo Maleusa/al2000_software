@@ -1,6 +1,7 @@
 package fc.machine;
 
-public interface Rentable {
+import fc.ComponentFC;
+import fc.constants.MovieState;
 
-	public void louer(Machine al2000);
+public interface Rentable extends ComponentFC{
 }

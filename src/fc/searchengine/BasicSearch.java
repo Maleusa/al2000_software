@@ -22,6 +22,8 @@ public class BasicSearch extends SearchEngine{
 					ArrayList<Tag> searchTag = new TagBuilder().buildListTag(data);
 					ArrayList<BluRay> resultStock =stockResearch(searchTag);
 					ArrayList<QRCode> resultDataBase = null;//ici query la db
+					machine.getSearchResultStock().setStock(resultDataBase); //POUR UML
+					//TRI du result
 					ArrayList<ArrayList> dataSent = new ArrayList<ArrayList>();
 					dataSent.add(resultStock);
 					dataSent.add(resultDataBase);
@@ -56,7 +58,7 @@ public class BasicSearch extends SearchEngine{
 		ArrayList<BluRay> tempPrio7 =new ArrayList<BluRay>();
 		ArrayList<BluRay> resultStock =new ArrayList<BluRay>();
 		for (Tag t : searchTag) {
-			for(BluRay b :machine.getStock().getRentableStock()) {
+			for(BluRay b :machine.getStock().getRentableMovies()) {
 				switch (b.getMovie().getPriority(t)) {
 					case 1:
 						if(!tempPrio1.contains(b))tempPrio1.add(b);

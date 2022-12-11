@@ -15,6 +15,9 @@ public class Stub3 {
 		return null;
 	}
 	
+	public ArrayList<HashMap<String, String>> cardInfoFromCB(int numCB){
+		return null;
+	}
 	public ArrayList<HashMap<String, String>> getStockBluRay(int id){
 		return null;
 	}

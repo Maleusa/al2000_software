@@ -11,7 +11,7 @@ import fc.searchengine.*;
  * Our Interface between the FC and the DAO part of the project
  * 
  */
-public interface DAORequestHandler extends ComponentFC {
+public interface DAORequestHandler {
 
 	/*
 	 * Return the list of physical movies (BluRay) inside the Al2000 given 
@@ -24,4 +24,5 @@ public interface DAORequestHandler extends ComponentFC {
 	
 	public ArrayList<QRCode> getRequestedDigitalMovies(HashMap<String, ArrayList<Tag>> requests); //On doit vérifier le paramêtre d'envoie.
 	
+	public User getUserFromCB(int numCB);
 }

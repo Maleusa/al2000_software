@@ -60,15 +60,12 @@ public class DAORequestHandlerMachine implements DAORequestHandler {
 		/*
 		 * ATTENTION à la rédaction dans la hashmap : avec/sans majuscule, anglais, etc 
 		 */
+		movie.setId(Integer.parseInt(movieInformations.get("id")));
 		movie.setTitle(movieInformations.get("title"));
-		movie.setDirector(movieInformations.get("director"));
+		movie.setDirectors(movieInformations.get("director"));
 		movie.setActors(movieInformations.get("actors"));
 		movie.setDescription(movieInformations.get("description"));
-		try {
-			movie.setRelease(new SimpleDateFormat("yyyy-mm-dd").parse(movieInformations.get("date")));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		movie.setYear(movieInformations.get("date"));
 		return movie;
 	}
 
@@ -77,13 +74,16 @@ public class DAORequestHandlerMachine implements DAORequestHandler {
 	 */
 	@Override
 	public User getUser(int userID) {
+		//Return subscriber
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
-	public void update(String EVENT_TYPE, ArrayList<String> data) {
+	public User getUserFromCB(int numCB) {
+		//return guest 
 		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
