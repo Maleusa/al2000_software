@@ -14,13 +14,20 @@ public class QueryBuilder {
 		
 	}
 	
-	public void getClientInfo(long carteBancaireId) {
+	public void getStockBluRay(int idAl2000) {
 		
-		this.query = new StringBuilder("select * from ABONNE where hashed_card_id = '" + carteBancaireId +"'");
-		
+		this.query = new StringBuilder("select title,real,acteur,decript,anneesortie,image,filmphysique.ide,etat,tag1,tag2,tag3,tag4,tag5,tag6,tag7,tag8,tag9,tag10\r\n"
+				+ "\r\n"
+				+ "from Lesfilms f, stockfilmphysique s, AL2000 a, filmphysique fp, genres g\r\n"
+				+ "\r\n"
+				+ "where f.ide=fp.id_film AND s.nmr_stock=a.id_stock_film_physique AND g.id_film=f.ide AND s.ide=fp.ide\r\n"
+				+ "    AND a.ide=#####");
+				
 	}
 	
-	public void getClientInfo(int ClientId) {
+	
+	
+	public void getCardInfo(int ClientId) {
 		
 		this.query = new StringBuilder("select * from Clients where IDE = '" + ClientId + "'");
 		
@@ -42,7 +49,7 @@ public class QueryBuilder {
 	 * @param List of list of Tags
 	 * @return void
 	 */
-	public void getFilm(List<List<Tag>> list) {
+	public void getDigitalMovies(List<List<Tag>> list) {
 
 		this.query = new StringBuilder("select * from LesFilms where\n");
 		

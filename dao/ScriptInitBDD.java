@@ -20,7 +20,7 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 public class ScriptInitBDD {
 
 	public static void main(String[] args) throws Exception {
-		DaoConnection aaa = new DaoConnection();
+		DaoConnection aaa = DaoConnection.getInstance();
 		aaa.connectDB();
 		/*ScriptRunner sr = new ScriptRunner(aaa.base);
 		Reader reader = new BufferedReader(new FileReader("C:\\Users\\Kilian\\Documents\\al2000.sql"));

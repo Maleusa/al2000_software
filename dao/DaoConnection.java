@@ -10,7 +10,8 @@ import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
 public class DaoConnection{
-
+	
+	private static DaoConnection instance;
 	static Session session;
 	String sshUser;	// strappah
 	String sshPassword;	//Pa$$word
@@ -20,7 +21,7 @@ public class DaoConnection{
 	int nRemotePort = 1521;
 	Connection base;
 
-	public DaoConnection() {
+	private DaoConnection() {
 		try (Scanner scan = new Scanner(System.in)) {
 			System.out.println("user :");
 			sshUser=scan.nextLine();
@@ -28,7 +29,14 @@ public class DaoConnection{
 			sshPassword=scan.nextLine();
 		}
 	}
-
+	
+	public static DaoConnection getInstance() {
+		if (DaoConnection.instance == null) {
+			DaoConnection.instance = new DaoConnection();
+		}
+		return DaoConnection.instance;
+	}
+	
 	private static Session doSshTunnel(String sshUser, String sshPassword, String sshHost, int sshPort,
 			String strRemoteHost, int nLocalPort, int nRemotePort) throws JSchException {
 		final JSch jsch = new JSch();
@@ -70,7 +78,10 @@ public class DaoConnection{
 			return null;
 		}
 	}
-
+	public Connection getBase() {
+		return this.base;
+	}
+	
 	public void disconnectDB(){
 		try {
 			base.close();
