@@ -17,7 +17,8 @@ public class GenreTag extends Tag {
 
 	@Override
 	public String query() {
-		String s=new String("SELECT * from FILMS where GENRE LIKE '%"+this.getTag()+"%'");
+		String s=new String("genre_un LIKE '%"+this.getTag()+"%' OR genre_deux LIKE '%"+this.getTag()+"%' OR"
+				+ " genre_trois LIKE '%"+ this.getTag()+ "%' OR genre_quatre LIKE '%"+this.getTag()+"%' OR genre_cinq LIKE '%"+this.getTag()+"%'");
 		return s;
 	}
 }

@@ -1,16 +1,8 @@
 package dao;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.sql.Date;
@@ -25,6 +17,7 @@ public class ScriptInitBDD {
 		ScriptRunner sr = new ScriptRunner(aaa.getBase());
 		Reader reader = new BufferedReader(new FileReader("C:\\Users\\Kilian\\Documents\\al2000.sql"));
 		sr.runScript(reader);
+		
 		//get all films id, titles, desc, release date
 		Downloader downloader = new Downloader();
 		String foldernametitle = downloader.urlFile("title");
@@ -48,8 +41,16 @@ public class ScriptInitBDD {
 		ToPushBDD images = new ToPushBDD(foldernameimages);
 		File[] imagesfiles = images.getListOfFiles();
 		
-		PreparedStatement pstmt;
+		PreparedStatement init = aaa.getBase().prepareStatement("INSERT INTO AL2000S VALUES (?, ?)");
+		init.setInt(1, 1);
+		init.setString(2, "Grenoble");
+		init.executeUpdate();
+		aaa.getBase().commit();
+		init.clearParameters();
 		
+		PreparedStatement pstmt;
+		PreparedStatement stockFilmsPhysiques;
+		PreparedStatement filmPhysique;
 		int i = 0;
 		for (File file : titlefiles) {//titlefiles
 			JSON_translator json_trs = new JSON_translator(i);
@@ -73,11 +74,10 @@ public class ScriptInitBDD {
 					new ArrayList<>(json_trs.translateKeywords(keywords.preparerProprietes(i)));
 			
 			String imageURL = json_trs.translateImages(images.preparerProprietes(i));
-			i++;
 			
 			//push � la base de donn�es
 			System.out.println("J'ins�re le film " + generalInformations[1] + " dont l'ID est " + generalInformations[0]);;
-			pstmt = aaa.getBase().prepareStatement("INSERT INTO LESFILMS VALUES (?,?,?,?,?,?,?)");
+			pstmt = aaa.getBase().prepareStatement("INSERT INTO LESFILMS VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			pstmt.setInt(1, Integer.valueOf(generalInformations[0]));
 		    pstmt.setString(2, generalInformations[1]);
 		    pstmt.setString(3, realList);
@@ -85,11 +85,40 @@ public class ScriptInitBDD {
 		    pstmt.setString(5, generalInformations[2]);
 		    pstmt.setInt(6, anneeDate);
 		    pstmt.setString(7, imageURL);
+		    int compt = 0;
+		    for (String s1 : genres) {
+		    	compt++;
+		    	pstmt.setString(7+compt, s1);
+		    }
+		    if (compt<7) {
+		    	compt++;
+		    	for (; compt <=7; compt++ ) {
+		    		pstmt.setString(7+compt, "NULL");
+		    	}
+		    }
 		    pstmt.executeUpdate();
-			aaa.getBase().commit();
+		    aaa.getBase().commit();
 			pstmt.clearParameters();
-			
+		    if (i<101) {
+		    	filmPhysique = aaa.getBase().prepareStatement("INSERT INTO FILMPHYSIQUE VALUES (?,?,?)");
+		    	filmPhysique.setInt(1, i+1);
+		    	filmPhysique.setString(2, "RENTABLE");
+		    	filmPhysique.setInt(3, Integer.valueOf(generalInformations[0]));
+		    	filmPhysique.executeUpdate();
+			    aaa.getBase().commit();
+				filmPhysique.clearParameters();
+				
+		    	stockFilmsPhysiques = aaa.getBase().prepareStatement("INSERT INTO STOCKFILMSPHYSIQUES VALUES (?,?)");
+		    	stockFilmsPhysiques.setInt(1, 1);
+		    	stockFilmsPhysiques.setInt(2, i+1);
+		    	stockFilmsPhysiques.executeUpdate();
+			    aaa.getBase().commit();
+				stockFilmsPhysiques.clearParameters();
+		    }
+		    
+			i++;
 		}
 		aaa.disconnect();
 	}
+	
 }

@@ -36,7 +36,7 @@ public class DaoMediatorConcret implements DaoMediator{
 	
 	public List<Map<String, Object>> getDigitalMovies(List<List<Tag>> list) throws Exception {
 		
-		DaoConnection database = DaoConnection.getInstance();
+		LocalDBconnection database = LocalDBconnection.getInstance();
 		QueryBuilder qb = new QueryBuilder();
 		qb.getDigitalMovies(list);
 		DaoExecQuery s = new DaoExecQuery(database.getBase(), qb.getQuery());
@@ -48,7 +48,7 @@ public class DaoMediatorConcret implements DaoMediator{
 	
 	public List<Map<String, Object>> getCardInfo(int id) throws Exception {
 		
-		DaoConnection database = DaoConnection.getInstance();
+		LocalDBconnection database = LocalDBconnection.getInstance();
 		QueryBuilder qb = new QueryBuilder();
 		qb.getCardInfo(id);
 		DaoExecQuery s = new DaoExecQuery(database.getBase(), qb.getQuery());
@@ -60,7 +60,7 @@ public class DaoMediatorConcret implements DaoMediator{
 	
 	public List<Map<String, Object>> getStockBluRay(int id) throws Exception {
 		
-		DaoConnection database = DaoConnection.getInstance();
+		LocalDBconnection database = LocalDBconnection.getInstance();
 		QueryBuilder qb = new QueryBuilder();
 		qb.getStockBluRay(id);
 		DaoExecQuery s = new DaoExecQuery(database.getBase(), qb.getQuery());

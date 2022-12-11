@@ -78,6 +78,11 @@ public class JSON_translator {
 		bw.write(utf8EncodedStringDesc);
 		bw.newLine();
 		bw.write(utf8EncodedStringDate);
+		bw.newLine();
+		for (String s8 : movieGenres) {
+			bw.write(s8);
+			bw.newLine();
+		}
 		bw.close();
 		
 		this.processed = new String[4];

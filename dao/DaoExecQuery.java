@@ -31,19 +31,27 @@ public class DaoExecQuery {
 				String cType = rsmd.getColumnTypeName(i);
 				switch (cType) {
 				case "DATE":
-					curr.put(rsmd.getColumnName(i), resultat.getDate(i));
+					curr.put(rsmd.getColumnName(i), resultat.getDate(i).toString());
 					break;
 				case "VARCHAR":
-					curr.put(rsmd.getColumnName(i), resultat.getString(i));
+					curr.put(rsmd.getColumnName(i), resultat.getString(i).toString());
 					break;
 				case "VARCHAR2":
-					curr.put(rsmd.getColumnName(i), resultat.getString(i));
-					break;
+					try {
+						curr.put(rsmd.getColumnName(i), resultat.getString(i).toString());
+					}
+					catch(NullPointerException npe){
+						curr.put(rsmd.getColumnName(i), "null");
+					}
+						break;
 				case "INT":
-					curr.put(rsmd.getColumnName(i), resultat.getInt(i));
+					curr.put(rsmd.getColumnName(i), resultat.getInt(i) + "");
+					break;
+				case "NUMBER":
+					curr.put(rsmd.getColumnName(i), resultat.getInt(i)+"");
 					break;
 				case "FLOAT":
-					curr.put(rsmd.getColumnName(i), resultat.getDouble(i));
+					curr.put(rsmd.getColumnName(i), resultat.getDouble(i)+"");
 					break;
 				default:
 					break;

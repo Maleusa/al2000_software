@@ -10,18 +10,14 @@ public class QueryBuilder {
 	
 	private StringBuilder query;
 	
-	public QueryBuilder() {
-		
+	public QueryBuilder() {	
 	}
 	
 	public void getStockBluRay(int idAl2000) {
 		
-		this.query = new StringBuilder("select title,real,acteur,decript,anneesortie,image,filmphysique.ide,etat,tag1,tag2,tag3,tag4,tag5,tag6,tag7,tag8,tag9,tag10\r\n"
-				+ "\r\n"
-				+ "from Lesfilms f, stockfilmphysique s, AL2000 a, filmphysique fp, genres g\r\n"
-				+ "\r\n"
-				+ "where f.ide=fp.id_film AND s.nmr_stock=a.id_stock_film_physique AND g.id_film=f.ide AND s.ide=fp.ide\r\n"
-				+ "    AND a.ide=#####");
+		this.query = new StringBuilder("select title, realisateur, acteurs, descript, anneesortie, genre_un, genre_deux, genre_trois, genre_quatre, genre_cinq, genre_six, genre_sept, affiche, fp.ide, etat"
+				+ " from LesFilms f, stockfilmsphysiques s, AL2000s a, filmphysique fp"
+				+ "	where f.ide = fp.id_film AND s.nmr_stock=a.ide AND s.ide_film_physique=fp.ide AND a.ide=" +idAl2000);
 				
 	}
 	
@@ -51,7 +47,8 @@ public class QueryBuilder {
 	 */
 	public void getDigitalMovies(List<List<Tag>> list) {
 
-		this.query = new StringBuilder("select * from LesFilms where\n");	
+		this.query = new StringBuilder("select * from LesFilms where\n");
+		
 		for (List<Tag> list2 : list) {
 			
 			if (!(list.get(0).equals(list2))) {
@@ -66,7 +63,7 @@ public class QueryBuilder {
 				
 				this.query.append(tag.query());
 				
-				if (!(list2.get(list.size()-2).equals(tag))) {
+				if (!(list2.get(list2.size()-1).equals(tag))) {
 					this.query.append(" OR ");
 					
 				}
