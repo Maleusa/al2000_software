@@ -41,7 +41,6 @@ public class BluRayStock implements Stock {
 	}
 
 	/*
-	 * TODO : Ajouter le notify() vers listenerDAO lors des modifs
 	 * 
 	 * EVENT_TYPE :
 	 * 	RENT_BLURAY_EVENT_TYPE

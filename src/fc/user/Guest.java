@@ -4,9 +4,8 @@ import java.util.ArrayList;
 
 public class Guest extends User{
 
-	protected Guest(int id) {
+	public Guest(int id) {
 		super(id);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
