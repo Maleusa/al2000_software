@@ -16,6 +16,11 @@ public class BasicSearch extends SearchEngine{
 	protected MediatorFC searchToStateMachine;
 	protected TagBuilder tagBuilder;
 	@Override
+	/*
+	 * EVENT_TYPE :
+	 * 	SEARCH_BY_TAG
+	 * 	SEARCH_NO_TAG
+	 */
 	public void update(String EVENT_TYPE, ArrayList<String> data) {
 		switch(EVENT_TYPE) {
 				case "SEARCH_BY_TAG":

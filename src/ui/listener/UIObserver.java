@@ -10,7 +10,8 @@ import fc.ComponentFC;
 public class UIObserver implements Observer {
 	
 	/*
-	 * EVENT_TYPE : 
+	 * EVENT_TYPE :
+	 * fc.Machine 
 	 * 	RENT_BLURAY_EVENT_TYPE with data as : one String wich is the BluRayId
 	 * 	RENT_QRCODE_EVENT_TYPE 
 	 * 	RETURN_DAMAGED_EVENT_TYPE
@@ -21,6 +22,10 @@ public class UIObserver implements Observer {
 	 * 	SIGN_OUT_EVENT_TYPE
 	 * 	RENT_PRINTQRCODE_EVENT_TYPE
 	 * 	RENT_FREEBLURAY_EVENT_TYPE
+	 * 	
+	 * 	fc.search
+	 * 	SEARCH_BY_TAG
+	 * 	SEARCH_NO_TAG
 	 * 
 	 */
 
