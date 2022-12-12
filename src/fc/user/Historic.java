@@ -14,8 +14,15 @@ public abstract class Historic{
 	 * Act as if it was a two side map : dates(i)<->rentals(i)
 	 */
 	private class RentalsDate{
+		//Date : dd-mm-yyyy
 		private String startDate;
 		private String endDate;
+		
+		private int getNbDay() {
+			int dayStart = Integer.parseInt(startDate.substring(0,2));
+			int dayEnd = Integer.parseInt(endDate.substring(0,2));
+			return dayEnd-dayStart;
+		}
 	}
 	protected ArrayList<RentalsDate> dates;
 	protected ArrayList<Rentable> rentals;
@@ -41,6 +48,14 @@ public abstract class Historic{
 		return false;
 	}
 	
+	public int getNbDay(int idMovie) {
+		for(int i=0; i<rentals.size(); i++)
+			if(rentals.get(i).getMovie().getId()==idMovie) {
+				return dates.get(i).getNbDay();
+			}
+		return 0;
+	}
+	
 	public void addRent(Rentable movie, String startDate, String endDate) {
 		RentalsDate date = new RentalsDate();
 		date.startDate=startDate;
@@ -48,5 +63,9 @@ public abstract class Historic{
 		
 		dates.add(date);
 		rentals.add(movie);
+	}
+	
+	public void endRent(int idMovie, String endDate) {
+		
 	}
 }

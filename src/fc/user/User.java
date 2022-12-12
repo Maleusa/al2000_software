@@ -79,4 +79,9 @@ public abstract class User implements ComponentFC{
 		return cardNumber;
 	}
 	
+	protected abstract int calculatePrice(int nbDay);
+	
+	protected boolean debitBankCard(int price) {
+		return true;
+	}
 }
