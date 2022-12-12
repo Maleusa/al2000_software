@@ -3,12 +3,16 @@ package fc.machine;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import dao.Stub3;
 import fc.ComponentFC;
 import fc.searchengine.SearchEngine;
 import fc.uiInterface.Observer;
 import fc.uiInterface.UIObserver;
 import fc.user.User;
+import ui.ChooseMovie;
+import ui.Welcome;
 import ui.stateMachine.StateMachine;
 
 /*
@@ -108,9 +112,16 @@ public class Machine implements ComponentFC {
 		 * TO DO : subscribe all the component to the observer
 		 * peut être un peu trop de résponsabilité
 		 */
-		//TODO uiObserver.subscribe("CONNEXION_EVENT_SUB_TYPE", this);
+		uiObserver.subscribe("GUEST_IN_EVENT_TYPE", this);
+		uiObserver.subscribe("SIGN_IN_EVENT_TYPE", this);
+		uiObserver.subscribe("SIGN_UP_EVENT_TYPE", this);
+		uiObserver.subscribe("SIGN_OUT_EVENT_TYPE", this);
+		uiObserver.subscribe("RENT_PRINTQRCODE_EVENT_TYPE", this);
+		uiObserver.subscribe("RENT_FREEBLURAY_EVENT_TYPE", this);
 		
-
+		uiObserver.subscribe("RENT_QRCODE_EVENT_TYPE", searchResultStock);
+		uiObserver.subscribe("SEARCH_BY_TAG", searchEngine);
+		uiObserver.subscribe("SEARCH_NO_TAG", searchEngine);
 	}
 	
 	public void openBluRayExit(BluRay bluray) {
@@ -178,11 +189,19 @@ public class Machine implements ComponentFC {
 	}
 	
 	public void launch() {
-		/*
-		 * Open the first Window
-		 * En théorie, Al ne s'éteint jamais, une fois launch le programme tourne jusqu'à la venue d'un technicien (la partie technicien 
-		 * n'étant pas encore implémenter, on verra plus tard), pour l'instant, il appuie sur le boutton on/off à l'arrière : On ferme javaSwing
-		 */
+		stock = new BluRayStock();
+		searchResultStock = new QRCodeStock();
+		stock.addAll(daoRequestHandler.getStockBluRay(0));
+		JFrame jFrame;
+		jFrame = new JFrame("AL2000");
+    	Welcome fw = new Welcome(jFrame,stateMachine);
+    	stateMachine.setCurrentPage(fw);
+    	//Initialisation du JFrame
+    	jFrame.setSize(900, 700);
+    	jFrame.setLocationRelativeTo(null);
+    	jFrame.setVisible(true);
+    	
+    	jFrame.add(fw);
 	}
 
 }

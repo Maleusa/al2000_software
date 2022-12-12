@@ -32,6 +32,22 @@ public class BasicSearch extends SearchEngine{
 		tagSelection.add(ct7);
 		}
 	
+	public TagBuilder getTagBuilder() {
+		return tagBuilder;
+	}
+
+	public void setTagBuilder(TagBuilder tagBuilder) {
+		this.tagBuilder = tagBuilder;
+	}
+
+	public Machine getMachine() {
+		return machine;
+	}
+
+	public void setMachine(Machine machine) {
+		this.machine = machine;
+	}
+
 	@Override
 	/*
 	 * EVENT_TYPE :
