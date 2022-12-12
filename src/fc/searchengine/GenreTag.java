@@ -16,7 +16,12 @@ public class GenreTag extends Tag {
 	public GenreTag(GenreTag genre) {
 		super(genre.getTag(),Priority.CINQ);
 	}
+	
+	public GenreTag clone() {
+		return new GenreTag(this);
 
+	}
+	
 	@Override
 	public String query() {
 		String s=new String("SELECT * from FILMS where GENRE LIKE '%"+this.getTag()+"%'");

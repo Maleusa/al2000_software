@@ -14,5 +14,9 @@ public class AllTag extends Tag {
 		
 		return "ALL";
 	}
+	public AllTag clone() {
+		return new AllTag(this);
+
+	}
 
 }

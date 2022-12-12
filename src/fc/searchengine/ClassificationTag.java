@@ -17,6 +17,10 @@ public class ClassificationTag extends Tag {
 		super(classification.getTag(),Priority.QUATRE);
 		
 	}
+	public ClassificationTag clone() {
+		return new ClassificationTag(this);
+
+	}
 
 	@Override
 	public String query() {

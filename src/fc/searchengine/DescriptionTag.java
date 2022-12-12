@@ -17,7 +17,10 @@ public class DescriptionTag extends Tag {
 		super(description.getTag(),Priority.SIX);
 	}
 
-	
+	public DescriptionTag clone() {
+		return new DescriptionTag(this);
+
+	}
 
 	@Override
 	public String query() {

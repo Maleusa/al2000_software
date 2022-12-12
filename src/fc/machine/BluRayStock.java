@@ -16,7 +16,7 @@ public class BluRayStock implements Stock {
 
 
 	
-
+	private ArrayList<BluRay> searchStock;
 	private ArrayList<BluRay> rentableStock; //Max Size = 100
 	private ArrayList<BluRay> rentedStock;
 	private ArrayList<BluRay> unverifiedStock; //Max Size = 10 (A warning is trigger on the DataBase if there is more than ten unverified movies)
@@ -24,6 +24,8 @@ public class BluRayStock implements Stock {
 	public BluRayStock() {
 		rentableStock = new ArrayList<BluRay>();
 		unverifiedStock = new ArrayList<BluRay>();
+		rentedStock = new ArrayList<BluRay>();
+		searchStock = new ArrayList<BluRay>();
 	}
 	
 	/*
@@ -36,6 +38,14 @@ public class BluRayStock implements Stock {
 		return null;
 	}
 	
+	public ArrayList<BluRay> getSearchStock() {
+		return searchStock;
+	}
+
+	public void setSearchStock(ArrayList<BluRay> searchStock) {
+		this.searchStock = searchStock;
+	}
+
 	public ArrayList<BluRay> getRentableMovies(){
 		return rentableStock;
 	}

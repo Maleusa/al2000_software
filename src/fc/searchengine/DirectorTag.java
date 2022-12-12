@@ -16,7 +16,10 @@ public class DirectorTag extends Tag {
 	public DirectorTag(DirectorTag director) {
 		super(director.getTag(),Priority.TROIS);
 	}
+	public DirectorTag clone() {
+		return new DirectorTag(this);
 
+	}
 	@Override
 	public String query() {
 		String s=new String("REALISATEUR LIKE '%"+this.getTag()+"%'");

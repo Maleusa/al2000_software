@@ -17,9 +17,16 @@ public class YearTag extends Tag {
 		this.setPrio(Priority.SEPT);
 		
 	}
+	
+	public YearTag clone() {
+		return new YearTag(this);
+
+	}
 	@Override
 	public String query() {
 		String s = new String("ANNEESORTIE LIKE '%"+this.getTag()+"%'");
 		return s;
 	}
+	
+	
 }
