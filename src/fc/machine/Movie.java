@@ -13,7 +13,6 @@ public class Movie {
 	private DescriptionTag description;
 	private YearTag year;
 	private String url;
-	
   
   
   	public Movie() {

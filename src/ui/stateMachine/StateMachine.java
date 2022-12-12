@@ -2,12 +2,12 @@ package ui.stateMachine;
 
 import java.util.ArrayList;
 
+import fc.uiInterface.Observer;
+import fc.uiInterface.UIObserver;
 import ui.SearchRepresentation;
 import ui.StockRepresentation;
 import ui.UiRepresentation;
 import ui.UserRepresentation;
-import ui.listener.Observer;
-import ui.listener.UIObserver;
 
 /*
  * TO DO : MAchine � �tat et M�mento

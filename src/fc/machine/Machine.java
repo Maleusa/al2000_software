@@ -7,9 +7,9 @@ import dao.Stub3;
 import fc.ComponentFC;
 import fc.MediatorFC;
 import fc.searchengine.SearchEngine;
+import fc.uiInterface.Observer;
+import fc.uiInterface.UIObserver;
 import fc.user.User;
-import ui.listener.Observer;
-import ui.listener.UIObserver;
 import ui.stateMachine.StateMachine;
 
 /*
