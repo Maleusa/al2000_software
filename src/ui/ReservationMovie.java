@@ -39,11 +39,11 @@ public class ReservationMovie extends Page {
 	
 	JButton deleteButton;
 	JButton backButton;
-	JButton userButton;
 	
 	ArrayList<JTextArea> liste = new ArrayList<JTextArea>();
 	
-	public ReservationMovie(JFrame jFrame, StateMachine stateM, ArrayList<String> s) {
+	public ReservationMovie(JFrame jFrame, StateMachine stateM) {
+		ArrayList<String> s = new ArrayList<>();//Info film
 		this.jF=jFrame;
 		this.stateMachine=stateM;
 		for(int i = 0; i<s.size();i++) {
@@ -65,7 +65,6 @@ public class ReservationMovie extends Page {
 		jPanel_north.add(jPanel_north_west, BorderLayout.WEST);
 		jPanel_north_west.setLayout(new FlowLayout(FlowLayout.LEFT));
 		jPanel_north_west.add(backButton= new JButton("<--"));
-		jPanel_north_west.add(userButton = new JButton("Mon compte"));
 		
 		
 		

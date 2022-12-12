@@ -14,10 +14,10 @@ public class mainUI {
 		
 		//Création des différents éléments composant notre JFrame
     	jFrame = new JFrame("AL2000");
-    	ResearchMovie fw = new ResearchMovie(jFrame,null);
+    	ChooseMovie fw = new ChooseMovie(jFrame,null);
     	
     	//Initialisation du JFrame
-    	jFrame.setSize(1100, 900);
+    	jFrame.setSize(900, 700);
     	jFrame.setLocationRelativeTo(null);
     	jFrame.setVisible(true);
     	

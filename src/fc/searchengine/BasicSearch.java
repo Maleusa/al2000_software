@@ -2,7 +2,6 @@ package fc.searchengine;
 
 import java.util.ArrayList;
 
-import fc.MediatorFC;
 import fc.TagBuilder;
 import fc.machine.BluRay;
 import fc.machine.Machine;
@@ -13,7 +12,6 @@ import fc.machine.QRCode;
 
 public class BasicSearch extends SearchEngine{
 	protected Machine machine;
-	protected MediatorFC searchToStateMachine;
 	protected TagBuilder tagBuilder;
 	
 	public BasicSearch() {

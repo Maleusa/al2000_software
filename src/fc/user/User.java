@@ -16,6 +16,12 @@ public abstract class User implements ComponentFC{
 	protected boolean identified;
 	protected int subscriberBalance;
 	
+	public int getSubscriberBalance() {
+		return subscriberBalance;
+	}
+	public void setSubscriberBalance(int subscriberBalance) {
+		this.subscriberBalance = subscriberBalance;
+	}
 	protected User(int id) {
 		this.id=id;
 		this.identified=false;

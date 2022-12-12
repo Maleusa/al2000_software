@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import fc.machine.Movie;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -18,7 +20,7 @@ public class MovieButton extends JButton{
 	private BufferedImage image;
 	private BufferedImage imageResize;
 	private int height, width;
-	
+	private Movie movie;
 	BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
 	    Image resultingImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
 	    BufferedImage outputImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
@@ -26,22 +28,31 @@ public class MovieButton extends JButton{
 	    return outputImage;
 	}
 	
-	public MovieButton(int width, int height, String imageUrl) {
-	this.height = height;
-	this.width = width;
-		try {
-			this.url = new URL(imageUrl); //"https://image.tmdb.org/t/p/w500/sU0SPvZPJj9AORrCqoI8JnhJiIw.jpg"
-			image = ImageIO.read(url);
-			imageResize = resizeImage(image,width,height);
-			icon = new ImageIcon(imageResize);
-			this.setIcon(icon);
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public MovieButton(int width, int height, String imageUrl, Movie movie) {
+		this.movie=movie;
+		this.height = height;
+		this.width = width;
+			try {
+				this.url = new URL(imageUrl); //"https://image.tmdb.org/t/p/w500/sU0SPvZPJj9AORrCqoI8JnhJiIw.jpg"
+				image = ImageIO.read(url);
+				imageResize = resizeImage(image,width,height);
+				icon = new ImageIcon(imageResize);
+				this.setIcon(icon);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	
+	public Movie getMovie() {
+		return movie;
+	}
+
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
+
 	public void setUrl(String imageUrl) {
 		try {
 			this.url=new URL(imageUrl);

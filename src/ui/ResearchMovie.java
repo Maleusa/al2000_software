@@ -12,11 +12,13 @@ import java.awt.Font;
 
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import fc.searchengine.ClickeableTag;
 import ui.stateMachine.Page;
 import ui.stateMachine.StateMachine;
 
@@ -123,7 +125,27 @@ public class ResearchMovie extends Page{
 		researchButton.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					boolean atLeastOneSelected = false;
+					for(JRadioButton radioButton : tabJRadio)
+						if(radioButton.isSelected()) atLeastOneSelected=true;
 					
+					if(atLeastOneSelected) {
+						ArrayList<ClickeableTag> tagSelection = stateMachine.getSearchModel().getTagSelection();
+						for(int i=0; i<tabJRadio.length; i++) 
+							if(tabJRadio[i].isSelected()) tagSelection.get(i).setClickedStatus(true);
+						
+						String[] request = researchZone.getText().split(" ");
+						ArrayList<String> data = new ArrayList<>();
+						for(String word : request) data.add(word);
+						
+						if(tabJRadio[tabJRadio.length-1].isSelected()) 
+							stateMachine.notifyObserver("SEARCH_NO_TAG", data);
+						else
+							stateMachine.notifyObserver("SEARCH_BY_TAG", data);
+						
+						stateMachine.changeState("TO_CHOOSE_MOVIE");
+					}
+					else JOptionPane.showMessageDialog(jF, "Pas de tag sélectionné.");
 				}
 		});
 		
@@ -153,7 +175,6 @@ public class ResearchMovie extends Page{
 					stateMachine.changeState("TO_USER_SPACE");
 				}
 		});
-		//panel_film.add(test, BorderLayout.CENTER);
 		
 		
 		
@@ -175,6 +196,20 @@ public class ResearchMovie extends Page{
 			jF.setContentPane(welPage);
 			jF.repaint();
 			jF.revalidate();
+			break;
+		case "TO_USER_SPACE":
+			UserSpace userPage = new UserSpace(jF, stateMachine);
+			stateMachine.setCurrentPage(userPage);
+			jF.setContentPane(userPage);
+			jF.repaint();
+			jF.revalidate();	
+			break;
+		case "TO_CHOOSE_MOVIE":
+			ChooseMovie choosePage = new ChooseMovie(jF, stateMachine);
+			stateMachine.setCurrentPage(choosePage);
+			jF.setContentPane(choosePage);
+			jF.repaint();
+			jF.revalidate();	
 			break;
 		}
 		

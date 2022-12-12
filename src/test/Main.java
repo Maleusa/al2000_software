@@ -9,11 +9,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		Machine al2000 = Machine.getInstance();
-		UIObserver uiObserver = null; //= new ....
+		UIObserver uiObserver = new UIObserver();
 		/*
 		 * Partie DAO
 		 */
-		DAORequestHandlerMachine daoRequestHandler = new DAORequestHandlerMachine();
+		DAORequestHandlerMachine daoRequestHandler = new DAORequestHandler();
 		al2000.setDAORequestHandler(daoRequestHandler);
 		al2000.getStockBluRayFromDAO();
 
