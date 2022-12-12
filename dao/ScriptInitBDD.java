@@ -75,8 +75,8 @@ public class ScriptInitBDD {
 			
 			String imageURL = json_trs.translateImages(images.preparerProprietes(i));
 			
-			//push � la base de donn�es
-			System.out.println("J'ins�re le film " + generalInformations[1] + " dont l'ID est " + generalInformations[0]);;
+			//push a la base de donnees
+			System.out.println("J'insere le film " + generalInformations[1] + " dont l'ID est " + generalInformations[0]);;
 			pstmt = aaa.getBase().prepareStatement("INSERT INTO LESFILMS VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			pstmt.setInt(1, Integer.valueOf(generalInformations[0]));
 		    pstmt.setString(2, generalInformations[1]);

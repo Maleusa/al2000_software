@@ -37,6 +37,19 @@ public class DaoConnection{
 		return DaoConnection.instance;
 	}
 	
+	 /**
+     * Initialize ssh tunnel between two server sshHost and sshRemoteHost
+     * 
+     * @param sshUser
+     * @param sshPassword
+     * @param sshHost
+     * @param sshPort
+     * @param strRemoteHost
+     * @param nLocalPort
+     * @param nRemotePort
+     * @return
+     * @throws JSchException
+     */
 	private static Session doSshTunnel(String sshUser, String sshPassword, String sshHost, int sshPort,
 			String strRemoteHost, int nLocalPort, int nRemotePort) throws JSchException {
 		final JSch jsch = new JSch();
@@ -57,7 +70,11 @@ public class DaoConnection{
 		}
 		return session;
 	}
-
+	
+	 /**
+     * Initialize the sqlplus connection to a Oracle server
+     * @return
+     */
 	public Connection connectDB() {
 		try {
 			String sshHost = "im2ag-mandelbrot.univ-grenoble-alpes.fr";
@@ -66,7 +83,7 @@ public class DaoConnection{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			session =doSshTunnel(sshUser, sshPassword, sshHost, sshPort, strRemoteHost, nLocalPort, nRemotePort);
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			base = DriverManager.getConnection("jdbc:oracle:thin:@localhost:"+nLocalPort+":im2ag", sshUser, "94bf0ae10f"); // connexion 942e7b79fc  94bf0ae10f
+			base = DriverManager.getConnection("jdbc:oracle:thin:@localhost:"+nLocalPort+":im2ag", sshUser, "942e7b79fc"); // connexion 942e7b79fc  94bf0ae10f
 			base.setAutoCommit(false);
 			System.out.println("base connected");
 
@@ -82,6 +99,9 @@ public class DaoConnection{
 		return this.base;
 	}
 	
+	/**
+     * exit sqlplus connection
+     */
 	public void disconnectDB(){
 		try {
 			base.close();

@@ -13,6 +13,11 @@ public class QueryBuilder {
 	public QueryBuilder() {	
 	}
 	
+	/** Builds the query to get the list of every physical movies in an Al2000, based on its id. We select all useful infos,
+	 *  namely : title, director, actors, description, release year, genres, poster, its id as a physical film, and its state.
+	 * 
+	 * @param idAl2000
+	 */
 	public void getStockBluRay(int idAl2000) {
 		
 		this.query = new StringBuilder("select title, realisateur, acteurs, descript, anneesortie, genre_un, genre_deux, genre_trois, genre_quatre, genre_cinq, genre_six, genre_sept, affiche, fp.ide, etat"
@@ -21,13 +26,26 @@ public class QueryBuilder {
 				
 	}
 	
-	
-	
+	/** Builds the query to get every info on a client based on their id.
+	 * 
+	 * @param ClientId
+	 */
 	public void getCardInfo(int ClientId) {
 		
 		this.query = new StringBuilder("select * from Clients where IDE = '" + ClientId + "'");
 		
 	}
+	
+	/** Builds the query to get every info on every subscription of a client based on their id.
+	 * 
+	 * @param ClientId
+	 */
+	public void getAbonnesFromClient(int ClientId) {
+		
+		this.query = new StringBuilder("select * from Abonne where id_client = '" + ClientId + "'");
+		
+	}
+	
 	/** Builds the query for a film research. Take a list of list of Tags that's built depending on
 	 *  checked JRadioButtons in the tag research and the String researched. For each String and Tag searched,
 	 *  we check for the existence of a combination of <Tag><String>, and we select lines where we have a matching combo.
@@ -74,26 +92,89 @@ public class QueryBuilder {
 
 		}
 	}
+	/**
+     * Build a query that insert a QRCode Location in database 
+     * @param l Arraylist of necessary info : l = {idBluRay, idUser, idAbonne}
+     */
+	public void insertLocationDemat(ArrayList<String> l) {// data = {idBluRay, idUser, idAbonne} la DAO doit créer une date à la reception et met les tables à jours
+		this.query=new StringBuilder("INSERT INTO HistoriqueLocationDemat"
+				+ "VALUES ((select max(ide)+1 from HistoriqueLocationDemat),"+ l.get(2)+ ", "+ l.get(0)+", (SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') FROM dual;) , (SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') FROM dual;), NULL)");
+	}
 	
-	public void insertLocationDemat(ArrayList<String> l) {
-        this.query=new StringBuilder("INSERT INTO HistoriqueLocation"
-                + "VALUES ("+ l.get(0)+ ", "+ l.get(1)+", "+ l.get(2)+", "+ l.get(3)+", NULL)");
-    }
-    
-    public void insertLocationPhys(ArrayList<String> l) {
-        this.query=new StringBuilder("INSERT INTO HistoriqueLocation"
-                + "VALUES ("+ l.get(0)+ ", "+ l.get(1)+", "+ l.get(2)+", "+ l.get(3)+", NULL)");
-    }
-    
-    public void updateClient(ArrayList<String> data) {
-        // TODO Auto-generated method stub
-        this.query=new StringBuilder("DELETE FROM TagPreferences t"
-                + "WHERE t.ide=value;");
-        
-        for (int i = 0; i < data.get(i).length(); i++) {////NE MARCHE PAS c'est normal tkt
-            this.query.append("INSERT INTO TagPreferences VALUES (value0, value1);");
-        }
-    }
+	/**
+    * Build a query that insert a Bluray Loaction in database
+    * @param l Arraylist of necessary info : l = {idBluRay, idUser, idAbonne, Price}
+    */
+	public void insertLocationPhys(ArrayList<String> l) {//, data = {idBluRay, idUser, idAbonne, Price} DAO gère date
+		this.query=new StringBuilder("INSERT INTO HistoriqueLocationPhysique(ide, id_film_physique ,id_abonne, ddloc, dfloc, price)"
+				+ "VALUES ((select max(ide)+1 from HistoriqueLocationDemat),"+ l.get(2)+ ", " + l.get(0)+", (SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') FROM dual;) , NULL, "+ l.get(3) +")");
+	}
+	/**
+    * Build a query that update all info from Abonne account
+    * @param data, Arraylist of necessary info : data = {idAbonne,"Nom", "Mot de passe", "Adresse", "Genre bloqué", "Solde"}
+    */
+	public void updateClient(ArrayList<String> data) {// data = {idAbonne,"Nom", "Mot de passe", "Adresse", "Genre bloqué", "Solde"} met à jour les tables
+		// TODO Auto-generated method stub
+		this.query=new StringBuilder("DELETE FROM TagBloque t"
+				+ "WHERE t.ide=value;\n");
+		
+		String tag = data.get(4);
+		String[] tagsplit = tag.split(" ");
+		for (int i = 0; i < tagsplit.length; i++) {
+			
+			this.query.append("INSERT INTO TagBloque VALUES ("+ data.get(0) +","+ tagsplit[i] +");\n");
+		}
+		
+		this.query.append("\n");
+		this.query.append("UPDATE CLIENTS"
+				+"SET name = "+data.get(1)
+				+"adress ="+data.get(3)
+				+"WHERE ide = (SELECT id_client FROM Abonne	WHERE ide = " +data.get(0)+ ");");
+		this.query.append("UPDATE Abonne"
+				+"SET hashed_password = " + data.get(2)
+				+"montant_carte_abonnement =" + data.get(5)
+				+"WHERE ide = "+data.get(0));
+	}
+	
+	/**
+    * Build a query that update a specified Location and set his state to CORRECT
+    * @param data, Arraylist of necessary info : data = {idBluRay, idUser, idAbonne, Price}
+    */
+	public void returnLocationCorrect(ArrayList<String> data) {// data = {idBluRay, idUser, idAbonne, Price} DAO gère date
+		this.query=new StringBuilder("UPDATE HistoriqueLocationPhysique"
+				+ "SET dfloc = (SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') FROM dual;) "
+				+ "WHERE  id_abonne = " + data.get(2) + " AND " + "id_film_physique = " +  data.get(0) + " AND " + "dfloc = NULL;"
+				+ "UPDATE FilmPhysique"
+				+ "SET etat = UNVERIFIED"
+				+ "WHERE id_film = " + data.get(0)
+				);
+		//UPDATE table_name
+		//SET column1 = value1, column2 = value2, ...
+		//WHERE condition;
+	}
+	
+	/**
+     * Build a query that update a Location and set his state to UNVERIFIED
+     * @param data, Arraylist of necessary info : data = {idBluRay, idUser, idAbonne, Price}
+     */
+	public void returnLocationDamaged(ArrayList<String> data) {// data = {idBluRay, idUser, idAbonne, Price} DAO gère date
+		this.query=new StringBuilder("UPDATE HistoriqueLocationPhysique"
+				+ "SET dfloc = (SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') FROM dual;) "
+				+ "WHERE  id_abonne = " + data.get(2) + " AND " + "id_film_physique = " +  data.get(0) + " AND " + "dfloc = NULL;"
+				+ "UPDATE FilmPhysique"
+				+ "SET etat = UNVERIFIED"
+				+ "WHERE id_film = " + data.get(0)
+				);
+	}
+	/**
+     * Build a querry that update a state of a phisical movie
+     * @param data, Arraylist of necessary info : data = { idAbonne, IdBluray, state }
+     */
+	public void updateStateFilmPhys(ArrayList<String> data) {
+		this.query=new StringBuilder("UPDATE FilmPhysique"
+				+ "SET etat =" + data.get(2)
+				+ "WHERE ide ="+ data.get(1));
+	}
 	
 	public String getQuery () {
 		return this.query.toString();

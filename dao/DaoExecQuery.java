@@ -26,8 +26,8 @@ public class DaoExecQuery {
 		List<Map<String, Object>> r = new ArrayList<>();
 		ResultSetMetaData rsmd = resultat.getMetaData();
 		while(resultat.next()) {
+			Map<String, Object> curr = new HashMap<>();
 			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-				Map<String, Object> curr = new HashMap<>();
 				String cType = rsmd.getColumnTypeName(i);
 				switch (cType) {
 				case "DATE":
@@ -56,8 +56,8 @@ public class DaoExecQuery {
 				default:
 					break;
 				}
-				r.add(curr);
 			}
+			r.add(curr);
 		}
 		return r;
 	}

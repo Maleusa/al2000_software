@@ -41,6 +41,7 @@ public class LocalDBconnection extends Thread{
 	
 	public void disconnect() throws SQLException {
 		base.close();
+		System.out.println("disconnected");
 	}
 	
 	public void run(){  

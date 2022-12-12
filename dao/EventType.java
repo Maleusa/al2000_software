@@ -1,5 +1,9 @@
 package dao;
 
-public class EventType {
-
+public enum EventType {
+    RENT_BLURAY_EVENT_DAO,
+    UPDATE_SUBSCRIBER_EVENT_DAO,
+    RETURN_DAMAGED_EVENT_DAO,
+    RETURN_CORRECT_EVENT_DAO,
+    QRCODE_RENT_EVENT_DAO;
 }
