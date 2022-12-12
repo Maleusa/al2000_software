@@ -14,7 +14,7 @@ public abstract class Tag implements Cloneable  {
 	private int prio;
 	
 	public Tag()  {
-		
+	 this.tag="";	
 	}
 	/**
 	 * Constructeur de base d'un tag prenant un string en argument

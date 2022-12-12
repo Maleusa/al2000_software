@@ -4,7 +4,7 @@ import fc.constants.Priority;
 
 public class DirectorTag extends Tag {
 
-	public DirectorTag() throws Exception {
+	public DirectorTag()  {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -4,7 +4,7 @@ import fc.constants.Priority;
 
 public class YearTag extends Tag {
 
-	public YearTag() throws Exception {
+	public YearTag()  {
 		super();
 		// TODO Auto-generated constructor stub
 	}

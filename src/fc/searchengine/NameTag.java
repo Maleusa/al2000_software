@@ -4,7 +4,7 @@ import fc.constants.Priority;
 
 public class NameTag extends Tag {
 
-	public NameTag() throws Exception {
+	public NameTag()  {
 		super();
 		// TODO Auto-generated constructor stub
 	}

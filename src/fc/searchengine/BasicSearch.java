@@ -15,6 +15,25 @@ public class BasicSearch extends SearchEngine{
 	protected Machine machine;
 	protected MediatorFC searchToStateMachine;
 	protected TagBuilder tagBuilder;
+	
+	public BasicSearch() {
+		this.tagSelection=new ArrayList<ClickeableTag>();
+		ClickeableTag ct= new ClickeableTag(new NameTag());
+		tagSelection.add(ct);
+		ClickeableTag ct2= new ClickeableTag(new ActorTag());
+		tagSelection.add(ct2);
+		ClickeableTag ct3= new ClickeableTag(new DirectorTag());
+		tagSelection.add(ct3);
+		ClickeableTag ct4= new ClickeableTag(new GenreTag());
+		tagSelection.add(ct4);
+		ClickeableTag ct5= new ClickeableTag(new YearTag());
+		tagSelection.add(ct5);
+		ClickeableTag ct6= new ClickeableTag(new DescriptionTag());
+		tagSelection.add(ct6);
+		ClickeableTag ct7= new ClickeableTag(new AllTag());
+		tagSelection.add(ct7);
+		}
+	
 	@Override
 	/*
 	 * EVENT_TYPE :
@@ -29,6 +48,8 @@ public class BasicSearch extends SearchEngine{
 					ArrayList<QRCode> resultDataBase = new ArrayList<QRCode>();//ici query la db
 					machine.getSearchResultStock().setStock(resultDataBase); //POUR UML
 					machine.getStock().setSearchStock(resultStock);
+					for(ClickeableTag ct : tagSelection)
+						ct.setClickedStatus(false);
 					break;
 				case "SEARCH_NO_TAG":
 					ArrayList<Tag> searchAllTag = new TagBuilder().buildAllTag(data,this.getTagSelection());
@@ -36,8 +57,12 @@ public class BasicSearch extends SearchEngine{
 					ArrayList<QRCode> resultAllDataBase = new ArrayList<QRCode>();//ici query la db
 					machine.getSearchResultStock().setStock(resultAllDataBase); //POUR UML
 					machine.getStock().setSearchStock(resultAllStock);
+					for(ClickeableTag ct : tagSelection)
+						ct.setClickedStatus(false);
 					break;
 				default :
+					for(ClickeableTag ct : tagSelection)
+						ct.setClickedStatus(false);
 					break;
 		}
 		

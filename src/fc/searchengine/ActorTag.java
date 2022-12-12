@@ -4,7 +4,7 @@ import fc.constants.Priority;
 
 public class ActorTag extends Tag {
 
-	public ActorTag() throws Exception {
+	public ActorTag()  {
 		super();
 		this.setPrio(Priority.DEUX);
 	}
