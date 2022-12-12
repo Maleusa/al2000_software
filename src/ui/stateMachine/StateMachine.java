@@ -75,12 +75,42 @@ public class StateMachine {
 	 *	TO_PREVIOUS_PAGE : remove len-1 puis devient le new len-1
 	 *	TO_SIGNUP_PAGE
 	 *	TO_WELCOME_PAGE
+	 *	TO_USER_SPACE
+	 *	TO_CHOOSE_MOVIE
 	 */
 	
 	public StateMachine() {
 		previousState = new ArrayList<>();
 	}
 	
+	public User getUserModel() {
+		return userModel;
+	}
+
+	public SearchEngine getSearchModel() {
+		return searchModel;
+	}
+
+	public Stock getSearchResult() {
+		return searchResult;
+	}
+
+	public Stock getBluRayStock() {
+		return bluRayStock;
+	}
+
+	public ArrayList<Page> getPreviousState() {
+		return previousState;
+	}
+
+	public Page getCurrentPage() {
+		return currentPage;
+	}
+
+	public Observer getObserver() {
+		return observer;
+	}
+
 	public void reboot() {
 		previousState = new ArrayList<>();
 	}

@@ -2,6 +2,9 @@ package ui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -20,6 +23,16 @@ import ui.stateMachine.StateMachine;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+/*
+ * PUBLIC_EVENT:
+ * 	SIGN_OUT_EVENT_TYPE , data as : String[0] User id
+ *  SEARCH_BY_TAG , data as String[n] = keyword n
+ *	SEARCH_NO_TAG , data as String[n] = keyword n
+ * GUI_EVENT:
+ *	TO_USER_SPACE
+ *	TO_CHOOSE_MOVIE
+ *	TO_WELCOME_PAGE (for return and exit)
+ */
 public class ResearchMovie extends Page{
 	JPanel settingsPanel = new JPanel();
 	JPanel settingsPanelRight = new JPanel();
@@ -42,7 +55,7 @@ public class ResearchMovie extends Page{
 	JButton userButton = new JButton("Mon compte");
 	String[] eventList = {"Title","Actor", "Director", "Type", "Year of release","Description", "Tous"};
 	JRadioButton[] tabJRadio = new JRadioButton[eventList.length];
-	String[] s = {"Nom : ", "Prénom : ", "Adresse : ", "Genre bloqués : zddddddddddddddddddqbitebitebitebitebitebitebite ", "Solde : "};
+	String[] s = {"Nom : ", "Adresse : ", "Genre bloqués : ", "Solde : "};
 	JTextArea[] jl = new JTextArea[s.length];
 	Font font = new Font("TimesRoman", Font.BOLD, 18);
 	//film_button test = new film_button(200,300,"https://image.tmdb.org/t/p/w500/sU0SPvZPJj9AORrCqoI8JnhJiIw.jpg");
@@ -107,8 +120,39 @@ public class ResearchMovie extends Page{
 		tabJPanel[1].add(userPanelRadioButton);
 		tabJPanel[2].add(researchButton);
 		
+		researchButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+		});
 		
+		backButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ArrayList<String> data = new ArrayList<>();
+					data.add(""+stateMachine.getUserModel().getId());
+					stateMachine.notifyObserver("SIGN_OUT_EVENT_TYPE", data);
+					stateMachine.changeState("TO_WELCOME_PAGE");
+				}
+		});
 		
+		deleteButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ArrayList<String> data = new ArrayList<>();
+					data.add(""+stateMachine.getUserModel().getId());
+					stateMachine.notifyObserver("SIGN_OUT_EVENT_TYPE", data);
+					stateMachine.changeState("TO_WELCOME_PAGE");
+				}
+		});
+		
+		userButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					stateMachine.changeState("TO_USER_SPACE");
+				}
+		});
 		//panel_film.add(test, BorderLayout.CENTER);
 		
 		
@@ -117,13 +161,22 @@ public class ResearchMovie extends Page{
 
 	@Override
 	public void addStateMachine(StateMachine stateMachine) {
-		// TODO Auto-generated method stub
+		this.stateMachine=stateMachine;
 		
 	}
 
 	@Override
 	public void changeState(String EVENT) {
-		// TODO Auto-generated method stub
+		switch(EVENT) {
+		case"TO_WELCOME_PAGE":
+			Welcome welPage = new Welcome(jF, stateMachine);
+			stateMachine.setCurrentPage(welPage);
+			stateMachine.reboot();
+			jF.setContentPane(welPage);
+			jF.repaint();
+			jF.revalidate();
+			break;
+		}
 		
 	}
 }
