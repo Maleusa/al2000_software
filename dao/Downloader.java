@@ -20,7 +20,7 @@ import javax.swing.SwingWorker;
 
 
 public class Downloader extends SwingWorker<String,String> {
-	public static final int CHUNK_SIZE = 1024;
+	public static final int CHUNK_SIZE = 16384;
 	
 	URL url;
 	int content_length;
@@ -90,7 +90,7 @@ public class Downloader extends SwingWorker<String,String> {
 			
 			size += count;
 			setProgress(100*size/content_length);
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		}
 		
 		if(size < content_length) {
@@ -116,7 +116,7 @@ public class Downloader extends SwingWorker<String,String> {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String url;
         try {
-            Path path2 = Paths.get("C:\\Users\\Kilian\\Documents\\Films" + nature);
+            Path path2 = Paths.get("/al2000_software/Films" + nature);
             dir = Files.createDirectories(path2);
 
         } 

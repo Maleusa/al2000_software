@@ -75,6 +75,26 @@ public class QueryBuilder {
 		}
 	}
 	
+	public void insertLocationDemat(ArrayList<String> l) {
+        this.query=new StringBuilder("INSERT INTO HistoriqueLocation"
+                + "VALUES ("+ l.get(0)+ ", "+ l.get(1)+", "+ l.get(2)+", "+ l.get(3)+", NULL)");
+    }
+    
+    public void insertLocationPhys(ArrayList<String> l) {
+        this.query=new StringBuilder("INSERT INTO HistoriqueLocation"
+                + "VALUES ("+ l.get(0)+ ", "+ l.get(1)+", "+ l.get(2)+", "+ l.get(3)+", NULL)");
+    }
+    
+    public void updateClient(ArrayList<String> data) {
+        // TODO Auto-generated method stub
+        this.query=new StringBuilder("DELETE FROM TagPreferences t"
+                + "WHERE t.ide=value;");
+        
+        for (int i = 0; i < data.get(i).length(); i++) {////NE MARCHE PAS c'est normal tkt
+            this.query.append("INSERT INTO TagPreferences VALUES (value0, value1);");
+        }
+    }
+	
 	public String getQuery () {
 		return this.query.toString();
 	}
