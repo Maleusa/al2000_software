@@ -1,7 +1,7 @@
 package test;
+import fc.listener.UIObserver;
 import fc.machine.DAORequestHandlerMachine;
 import fc.machine.Machine;
-import ui.listener.UIObserver;
 public class Main {
 
 	public static void main(String[] args) {

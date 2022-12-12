@@ -8,7 +8,7 @@ import fc.searchengine.SearchEngine;
 import ui.SearchRepresentation;
 import ui.StockRepresentation;
 import ui.stateMachine.StateMachine;
-
+@Deprecated //slated for removal
 public class FCToStateMachine  implements MediatorFC{
 	protected SearchEngine searchEngine;
 	protected StateMachine stateMachine;

@@ -6,10 +6,10 @@ import java.util.Scanner;
 import dao.Stub3;
 import fc.ComponentFC;
 import fc.MediatorFC;
+import fc.listener.Observer;
+import fc.listener.UIObserver;
 import fc.searchengine.SearchEngine;
 import fc.user.User;
-import ui.listener.Observer;
-import ui.listener.UIObserver;
 import ui.stateMachine.StateMachine;
 
 /*

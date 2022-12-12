@@ -22,4 +22,14 @@ public abstract class Historic{
 		String date = new SimpleDateFormat("dd-mm-yyyy").format(new Date());
 		historic.put(date, film);
 	}
+
+	public HashMap<String, Rentable> getHistoric() {
+		return historic;
+	}
+
+	public void setHistoric(HashMap<String, Rentable> historic) {
+		this.historic = historic;
+	}
+	
+	
 }
