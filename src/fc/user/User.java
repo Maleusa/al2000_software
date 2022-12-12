@@ -22,6 +22,13 @@ public abstract class User implements ComponentFC{
 		this.restrictedGenre = new ArrayList<GenreTag>();
 		this.subscriberBalance=0;
 	}
+	/**
+	 * This is what you use to get a model of a User in an interface
+	 * @return this User
+	 */
+	public User getModelUser() {
+		return this;
+	}
 	
 	public void setPassword(String password) {
 		this.password = password;

@@ -42,4 +42,10 @@ public class QRCodeStock implements Stock{
 	public void setStock(ArrayList<QRCode> collection) {
 		movies=collection;
 	}
+
+	@Override
+	public Stock getStockModel() {
+		
+		return this;
+	}
 }

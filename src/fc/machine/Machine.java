@@ -6,8 +6,6 @@ import java.util.Scanner;
 import dao.Stub3;
 import fc.ComponentFC;
 import fc.MediatorFC;
-import fc.listener.Observer;
-import fc.listener.UIObserver;
 import fc.searchengine.SearchEngine;
 import fc.uiInterface.Observer;
 import fc.uiInterface.UIObserver;

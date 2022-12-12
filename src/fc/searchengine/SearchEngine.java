@@ -27,4 +27,14 @@ public abstract class SearchEngine implements ComponentFC{
 		this.tagSelection = tagSelection;
 	}
 	
+	
+	/**
+	 * This is the interface to get a model of the current search engine
+	 * that you use in yout interface
+	 * @return this SearchEngine
+	 */
+	public SearchEngine getSearchEngineModels() {
+		return this;
+	}
+	
 }

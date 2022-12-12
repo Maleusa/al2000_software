@@ -41,5 +41,10 @@ public class QRCode implements Rentable  {
 	
 	}
 
+	@Override
+	public Movie getMovieModel() {
+		return movie.getMovieModel();
+	}
+
 
 }

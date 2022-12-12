@@ -61,4 +61,9 @@ public class BluRay implements Rentable {
 		}
 	}
 
+	@Override
+	public Movie getMovieModel() {
+		return movie.getMovieModel();
+				}
+
 }

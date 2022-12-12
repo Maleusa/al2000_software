@@ -34,7 +34,7 @@ public abstract class Historic{
 	
 	public ArrayList<String> getRepresentation(){
 		ArrayList<String> representation = new ArrayList<>();
-		for(int i=0; i<rentals.size(); i++) //Un peu ignoble car c'est le fc qui met les : et to et ça devrait être l'ui
+		for(int i=0; i<rentals.size(); i++) //Un peu ignoble car c'est le fc qui met les : et to et ï¿½a devrait ï¿½tre l'ui
 			representation.add(rentals.get(i).getMovie().getTitle().toString()+" : "+dates.get(i).startDate+" to "+dates.get(i).endDate);
 		return representation;
 	}
@@ -42,7 +42,7 @@ public abstract class Historic{
 	public boolean isRented(int idBluRay) {
 		for(Rentable movie : rentals)
 			if(movie instanceof BluRay) {
-				BluRay bluray = (BluRay) (movie); //C'est dégueu il vaut mieux que je passe par un test avec date début et fin comme ça générique
+				BluRay bluray = (BluRay) (movie); //C'est dï¿½gueu il vaut mieux que je passe par un test avec date dï¿½but et fin comme ï¿½a gï¿½nï¿½rique
 				if(bluray.getId()==idBluRay && bluray.getState()==MovieState.RENTED) return true;
 			}
 		return false;
@@ -68,13 +68,13 @@ public abstract class Historic{
 	public void endRent(int idMovie, String endDate) {
 		
 	}
-
-	public HashMap<String, Rentable> getHistoric() {
-		return historic;
-	}
-
-	public void setHistoric(HashMap<String, Rentable> historic) {
-		this.historic = historic;
+	/**
+	 * This is the interface to get a model of the current User Historic
+	 * that you use in yout interface
+	 * @return this Historic model
+	 */
+	public Historic getHistoricModel() {
+		return this;
 	}
 	
 	

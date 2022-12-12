@@ -48,7 +48,7 @@ public class BluRayStock implements Stock {
 	 * 	RETURN_CORRECT_EVENT_TYPE
 	 */
 	public void update(String EVENT_TYPE, ArrayList<String> data) {
-		int id = Integer.parseInt(data.get(0)); //Changera peut être si d'autre event
+		int id = Integer.parseInt(data.get(0)); //Changera peut ï¿½tre si d'autre event
 		switch(EVENT_TYPE) {
 			case "RENT_BLURAY_EVENT_TYPE":
 				for(BluRay bluray : rentableStock)
@@ -109,6 +109,12 @@ public class BluRayStock implements Stock {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public Stock getStockModel() {
+		
+		return this;
 	}
 
 	

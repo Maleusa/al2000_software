@@ -133,6 +133,15 @@ public class Movie {
 	public void setYear(YearTag year) {
 		this.year = year;
 	}
+	/**
+	 * This is the interface by wich your ui can get a modele
+	 * of movies that are in the fc
+	 * @return this Movie
+	 */
+	public Movie getMovieModel() {
+		return this;
+		
+	}
 }
 	
 	
