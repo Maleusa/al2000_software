@@ -2,6 +2,9 @@ package test;
 import fc.listener.UIObserver;
 import fc.machine.DAORequestHandlerMachine;
 import fc.machine.Machine;
+
+import fc.uiInterface.UIObserver;
+
 public class Main {
 
 	public static void main(String[] args) {

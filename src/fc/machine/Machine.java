@@ -9,6 +9,8 @@ import fc.MediatorFC;
 import fc.listener.Observer;
 import fc.listener.UIObserver;
 import fc.searchengine.SearchEngine;
+import fc.uiInterface.Observer;
+import fc.uiInterface.UIObserver;
 import fc.user.User;
 import ui.stateMachine.StateMachine;
 

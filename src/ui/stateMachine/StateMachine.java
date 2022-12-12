@@ -2,11 +2,12 @@ package ui.stateMachine;
 
 import java.util.ArrayList;
 
-import fc.listener.Observer;
-import fc.listener.UIObserver;
+
 import fc.machine.Stock;
 import fc.searchengine.SearchEngine;
 import fc.user.User;
+import fc.uiInterface.Observer;
+import fc.uiInterface.UIObserver;
 import ui.SearchRepresentation;
 import ui.StockRepresentation;
 import ui.UiRepresentation;
