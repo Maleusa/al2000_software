@@ -1,6 +1,8 @@
 package ui;
 
 import java.awt.HeadlessException;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
 public class mainUI {
@@ -12,7 +14,7 @@ public class mainUI {
 		
 		//Création des différents éléments composant notre JFrame
     	jFrame = new JFrame("AL2000");
-    	Welcome fw = new Welcome(jFrame);
+    	ResearchMovie fw = new ResearchMovie(jFrame,null);
     	
     	//Initialisation du JFrame
     	jFrame.setSize(1100, 900);

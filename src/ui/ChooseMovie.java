@@ -12,6 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import ui.stateMachine.Page;
+import ui.stateMachine.StateMachine;
+
 /*
  * 
  * Window where user choose movie
@@ -22,7 +25,9 @@ import javax.swing.JPanel;
  * 
  */
 
-public class ChooseMovie extends JPanel{
+public class ChooseMovie extends Page{
+	
+	StateMachine stateMachine;
 	
 	JButton button_delete;
 	JButton button_user;
@@ -39,9 +44,10 @@ public class ChooseMovie extends JPanel{
 	JPanel jPanel_center_top = new JPanel();
 	JPanel jPanel_center_down = new JPanel();
 	ArrayList<String> myList= new ArrayList<>();
-	
-	public ChooseMovie(JFrame jF) {		
-		
+	JFrame jF;
+	public ChooseMovie(JFrame jFrame, StateMachine stateM) {	
+		this.jF=jFrame;
+		this.stateMachine=stateM;
 		/*
 		 * North Panel : exit button / GoBack button / MyAccountButton 
 		 */
@@ -79,5 +85,18 @@ public class ChooseMovie extends JPanel{
 		
 		
 
+	}
+
+
+	@Override
+	public void addStateMachine(StateMachine stateMachine) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeState(String EVENT) {
+		// TODO Auto-generated method stub
+		
 	}
 }

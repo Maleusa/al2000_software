@@ -1,5 +1,5 @@
 package test;
-import fc.listener.UIObserver;
+import fc.uiInterface.UIObserver;
 import fc.machine.DAORequestHandlerMachine;
 import fc.machine.Machine;
 

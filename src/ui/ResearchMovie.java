@@ -13,15 +13,20 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JButton;
 
-public class ResearchMovie extends JPanel{
+import ui.stateMachine.Page;
+import ui.stateMachine.StateMachine;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class ResearchMovie extends Page{
 	JPanel settingsPanel = new JPanel();
 	JPanel settingsPanelRight = new JPanel();
 	JPanel subPanel = new JPanel();
 	JPanel moviePanel = new JPanel();
-	String[] userInformation = {"Prix","bob"};
-	JLabel[] tabJLabel = new JLabel[userInformation.length];
+	JPanel settingsPanelLeft = new JPanel();
+	JPanel subPanelCenter = new JPanel();
 	JPanel[] tabJPanel = new JPanel[3];
 	
 	
@@ -33,35 +38,51 @@ public class ResearchMovie extends JPanel{
 	JTextArea researchZone = new JTextArea();
 	JButton researchButton = new JButton("Recherche");
 	JButton deleteButton = new JButton("X");
-	JButton backButton = new JButton("Retour");
+	JButton backButton = new JButton("<--");
 	JButton userButton = new JButton("Mon compte");
-	String[] eventList = {"Film","Realisateur", "Action", "Horreur", "Amour","-18","Enfant","test","jeSuisGentil","Bof","manque d'idÃ©e"};
+	String[] eventList = {"Title","Actor", "Director", "Type", "Year of release","Description", "Tous"};
 	JRadioButton[] tabJRadio = new JRadioButton[eventList.length];
+	String[] s = {"Nom : ", "Prénom : ", "Adresse : ", "Genre bloqués : zddddddddddddddddddqbitebitebitebitebitebitebite ", "Solde : "};
+	JTextArea[] jl = new JTextArea[s.length];
+	Font font = new Font("TimesRoman", Font.BOLD, 18);
 	//film_button test = new film_button(200,300,"https://image.tmdb.org/t/p/w500/sU0SPvZPJj9AORrCqoI8JnhJiIw.jpg");
 	
-	public ResearchMovie() {
-		
+	JFrame jF;
+	StateMachine stateMachine;
+	
+	public ResearchMovie(JFrame jFrame, StateMachine stateM) {
+		this.jF=jFrame;
+		this.stateMachine=stateM;
 		this.setLayout(new BorderLayout());
-		label_id.setFont(new Font("Verdana", Font.PLAIN, 28));
-		label_id.setForeground(Color.WHITE);
+		label_id.setFont(font);
 		
 		
 		//Partie NORD du Blayout
 		this.add(settingsPanel, BorderLayout.NORTH);
 		
-		
-		
 		settingsPanel.setLayout(new BorderLayout());
 		settingsPanel.add(deleteButton,BorderLayout.EAST);
-		settingsPanel.add(backButton,BorderLayout.WEST);
+		settingsPanel.add(settingsPanelLeft,BorderLayout.WEST);
+		settingsPanelLeft.add(backButton);
+		settingsPanelLeft.add(userButton);
 		settingsPanel.setBackground(Color.BLUE);
+		
 		
 		//Panel OUEST du Blayout
 		subPanel.setLayout(new BorderLayout());
 		this.add(subPanel, BorderLayout.WEST);
 		subPanel.add(label_id,BorderLayout.NORTH);
-		subPanel.add(userButton,BorderLayout.SOUTH);
-		subPanel.setBackground(Color.red);
+		subPanel.add(subPanelCenter, BorderLayout.CENTER);
+		subPanelCenter.setLayout(new GridLayout(s.length,1));
+		for(int i = 0;i<s.length;i++) {
+			subPanelCenter.add(jl[i] = new JTextArea(s[i]));
+			jl[i].setEditable(false);
+			jl[i].setLineWrap(true);
+			jl[i].setWrapStyleWord(true);
+			jl[i].setFont(font);
+			
+			
+		}
 		
 		
 		//Panel CENTER du Blayout
@@ -91,6 +112,18 @@ public class ResearchMovie extends JPanel{
 		//panel_film.add(test, BorderLayout.CENTER);
 		
 		
+		
+	}
+
+	@Override
+	public void addStateMachine(StateMachine stateMachine) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeState(String EVENT) {
+		// TODO Auto-generated method stub
 		
 	}
 }

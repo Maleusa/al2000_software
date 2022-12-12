@@ -11,30 +11,41 @@ public class UIObserver implements Observer {
 	
 	/*
 	 * EVENT_TYPE :
-	 * fc.Machine 
-	 * 	RENT_BLURAY_EVENT_TYPE with data as : one String wich is the BluRayId
-	 * 	RENT_QRCODE_EVENT_TYPE 
-	 * 	RETURN_DAMAGED_EVENT_TYPE
-	 * 	RETURN_CORRECT_EVENT_TYPE
-	 * 	GUEST_IN_EVENT_TYPE (data = numCB)
-	 * 	SIGN_IN_EVENT_TYPE (data = numAbo)
-	 * 	SIGN_UP_EVENT_TYPE (data = all signUp info)
-	 * 	SIGN_OUT_EVENT_TYPE
-	 * 	RENT_PRINTQRCODE_EVENT_TYPE
-	 * 	RENT_FREEBLURAY_EVENT_TYPE
-	 * 	
-	 * 	fc.search
-	 * 	SEARCH_BY_TAG
-	 * 	SEARCH_NO_TAG
-	 * 
-	 * 	fc.User
-	 * 	UPDATE_SUBSCRIBER_EVENT_TYPE
-	 * 	AUTHENTIFICATION_EVENT_TYPE
-	 * 	RENT_BLURAY_EVENT_TYPE
-	 * 	RETURN_DAMAGED_EVENT_TYPE
-	 * 	RETURN_CORRECT_EVENT_TYPE
-	 * 	QRCODE_PAIE_EVENT_TYPE
-	 * 	REFOUND_TECHNICAL_EVENT_TYPE
+	 * data is an ArrayList<String>
+     *  fc.Machine 
+	 *	RENT_BLURAY_EVENT_TYPE , data as : String[0] wich is the BluRayId
+	 *	RENT_QRCODE_EVENT_TYPE , data as :
+	 *	RETURN_DAMAGED_EVENT_TYPE , data as : String[0] BluRay id
+	 *	RETURN_CORRECT_EVENT_TYPE , data as : String[0] BluRay id
+	 *	GUEST_IN_EVENT_TYPE , data as : String[0] wich is the credit card
+	 *	number
+	 *	SIGN_IN_EVENT_TYPE , data as :  String[0] wich is the subscriber
+	 *	number
+	 *	SIGN_UP_EVENT_TYPE , data as :String[0]: Subscriber Name 
+	 *	                              String[1]: Password 
+	 *	                              String[2]: Blocked Genre
+	 *	                              String[3]: Initial Balance  
+	 *	SIGN_OUT_EVENT_TYPE , data as : String[0] User id
+	 *	RENT_PRINTQRCODE_EVENT_TYPE , data as String[0] rented movie id
+	 *	RENT_FREEBLURAY_EVENT_TYPE , data as String[0] rented movie id
+	 *	
+	 *	fc.search
+	 *	SEARCH_BY_TAG , data as String[n] = keyword n
+	 *	SEARCH_NO_TAG , data as String[n] = keyword n
+	 *	
+	 *
+	 *	fc.User
+	 *	UPDATE_SUBSCRIBER_EVENT_TYPE , data as :String[0]: Subscriber Name 
+	 *	                                        String[1]: Password 
+	 *	                                        String[2]: Blocked Genre
+	 *	                                        String[3]: Current Balance 
+	 *	AUTHENTIFICATION_EVENT_TYPE , data as : String [0] User password
+	 *	RENT_BLURAY_EVENT_TYPE , data as : String[0] BluRay id
+	 *	RETURN_DAMAGED_EVENT_TYPE , data as : String[0] BluRay id
+	 *	RETURN_CORRECT_EVENT_TYPE , data as : String[0] BluRay id
+	 *	QRCODE_PAIE_EVENT_TYPE , data as : String[0] BluRay id
+	 *	                                   String[1] User id
+	 *	REFOUND_TECHNICAL_EVENT_TYPE , data as : String[0] UserId to refound
 	 */
 
 	public static String RENT_BLURAY_EVENT_TYPE = "RENT_BLURAY_EVENT_TYPE";

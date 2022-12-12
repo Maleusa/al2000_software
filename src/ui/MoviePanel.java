@@ -16,13 +16,12 @@ public class MoviePanel extends JPanel{
 	private ArrayList<MovieButton> listButton= new ArrayList<>();
 	private ArrayList<String> movies = new ArrayList<>();
     
-	public MoviePanel(ArrayList<String> s, JFrame jF) {
+	public MoviePanel(final ArrayList<String> s, final JFrame jF) {
 		
 		for(int i = 0;i<s.size(); i++) {
 			movies.add(s.get(i));
 		}
-		MovieButton rightArrow;
-		MovieButton leftArrow;
+		final MovieButton rightArrow;
 		//film_button[] film = new film_button[5];
 		JPanel panel = new JPanel();
 		JPanel panelWithMovie = new JPanel();
@@ -35,20 +34,28 @@ public class MoviePanel extends JPanel{
 		panel.setLayout(new BorderLayout());
 
 		rightArrow = new MovieButton(50,50,"https://www.onhaye.be/accordeon/fleche.jpg/@@images/image.jpeg");
-		leftArrow = new MovieButton(50,50,"https://assets.stickpng.com/images/585e4695cb11b227491c3373.png");
-
+		
 		panelWithMovie.setLayout(new GridLayout(1,5));
-		for(int i = 0;  i<5; i++) {
-			MovieButton button = new MovieButton(50,50,s.get(index));
-			listButton.add(button);
-			//film[i]=button;
-			index++;
-			panelWithMovie.add(listButton.get(i));
+		if(movies.size()>=5) {
+			for(int i = 0;  i<5; i++) {
+				MovieButton button = new MovieButton(50,50,s.get(index));
+				listButton.add(button);
+				//film[i]=button;
+				index++;
+				panelWithMovie.add(listButton.get(i));
+			}
+		} else {
+			for(int i = 0;i<movies.size(); i++) {
+				MovieButton button = new MovieButton(50,50,s.get(index));
+				listButton.add(button);
+				//film[i]=button;
+				index++;
+				panelWithMovie.add(listButton.get(i));
+			}
 		}
 		System.out.println("Indice :"+index);
 		
 		panel.add(rightArrow,BorderLayout.EAST);
-		panel.add(leftArrow,BorderLayout.WEST);
 		panel.add(panelWithMovie,BorderLayout.CENTER);
 		this.add(panel,BorderLayout.CENTER);
 		
@@ -59,7 +66,10 @@ public class MoviePanel extends JPanel{
 				
 				if (e.getSource().equals(rightArrow)) {
 				//////////////////////	
-					if(index+5<s.size()) {
+					if(movies.size()<5) {
+						JOptionPane.showMessageDialog(jF, "Il n'y a pas d'autre film:");
+					}
+					else if(index+5<s.size()) {
 						for(int i = 0;i<5; i++) {
 							listButton.get(i).setUrl(movies.get(index));
 							index++;
@@ -87,38 +97,6 @@ public class MoviePanel extends JPanel{
 				}
 			}
     	});
-		
-		leftArrow.addActionListener(new ActionListener() {
-	      	  
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				if (e.getSource().equals(leftArrow)) {
-				//////////////////////	
-					
-					if(index-10>=0) {
-						System.out.println("JE suis ici");
-						index = index-5;
-						for(int i = 0;i<5; i++) {
-							listButton.get(i).setUrl(movies.get(index));
-							index--;
-						}
-						jF.repaint();
-					} 
-				
-				//////////////////////////////////////////
-					else if(index == 5) {
-						
-					}
-					else {
-						
-					}
-				}
-			}
-    	});
-		
-		
-		
 		
 		}
 

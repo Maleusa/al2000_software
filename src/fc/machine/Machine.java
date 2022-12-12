@@ -27,9 +27,12 @@ public class Machine implements ComponentFC {
 	private DAORequestHandler daoRequestHandler;
 	private Observer uiObserver; 
 	private SearchEngine searchEngine;
-	private MediatorFC mediatorFC;
+	private StateMachine stateMachine;
 	//private EventListenerDAO
-	
+
+
+
+
 	private Machine() {
 		idMachine = 1; //ScanF 
 		stock = new BluRayStock();
@@ -37,19 +40,16 @@ public class Machine implements ComponentFC {
 	}
 	
 	
+
+
+	public StateMachine getStateMachine() {
+		return stateMachine;
+	}
+
+	public void setStateMachine(StateMachine stateMachine) {
+		this.stateMachine = stateMachine;
+	}
 	
-	public MediatorFC getMediatorFC() {
-		return mediatorFC;
-	}
-
-
-
-	public void setMediatorFC(MediatorFC mediatorFC) {
-		this.mediatorFC = mediatorFC;
-	}
-
-
-
 	public SearchEngine getSearchEngine() {
 		return searchEngine;
 	}
@@ -149,11 +149,9 @@ public class Machine implements ComponentFC {
 		switch(EVENT_TYPE) {
 			case "GUEST_IN_EVENT_TYPE":
 				currentUser = daoRequestHandler.getUserFromCB(Integer.parseInt(data.get(0)));
-				mediatorFC.notify(StateMachine.USER_UPDATE, currentUser);
 				break;
 			case "SIGN_IN_EVENT_TYPE":
 				currentUser = daoRequestHandler.getUser(Integer.parseInt(data.get(0))); //BOF BOF
-				mediatorFC.notify(StateMachine.USER_UPDATE, currentUser);
 				//TODO uiObserver.subscribe(EVENT_TYPE, currentUser)
 				break;
 			case "SIGN_UP_EVENT_TYPE":

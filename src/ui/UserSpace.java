@@ -6,13 +6,21 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class UserSpace extends JPanel{
+import ui.stateMachine.Page;
+import ui.stateMachine.StateMachine;
+
+public class UserSpace extends Page{
 	
-	public UserSpace() {
-		String[] s = {"Nom", "PrÃ©nom", "Adresse", "Telephone", "Mail"};
+	StateMachine stateMachine;
+	JFrame jF;
+	public UserSpace(JFrame jFrame, StateMachine stateM) {
+		this.jF=jFrame;
+		this.stateMachine=stateM;
+		String[] s = {"Nom", "Prénom", "Adresse", "Telephone", "Mail"};
 		JLabel[] jl = new JLabel[s.length];
 		
 		JPanel northPanel = new JPanel();
@@ -62,6 +70,19 @@ public class UserSpace extends JPanel{
 		this.setLayout(new BorderLayout());
 		this.add(northPanel, BorderLayout.NORTH);
 		this.add(centerPanel, BorderLayout.CENTER);
+		
+	}
+
+
+	@Override
+	public void addStateMachine(StateMachine stateMachine) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeState(String EVENT) {
+		// TODO Auto-generated method stub
 		
 	}
 }

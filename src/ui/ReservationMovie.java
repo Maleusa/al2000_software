@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Taskbar.State;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -18,11 +19,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class ReservationMovie extends JPanel {
+import ui.stateMachine.Page;
+import ui.stateMachine.StateMachine;
+
+public class ReservationMovie extends Page {
 	
-	
+	JFrame jF;
+	StateMachine stateMachine;
 	JPanel jPanel_north = new JPanel();
 	JPanel jPanel_north_east = new JPanel();
 	JPanel jPanel_north_west = new JPanel();
@@ -35,14 +41,17 @@ public class ReservationMovie extends JPanel {
 	JButton backButton;
 	JButton userButton;
 	
-	ArrayList<String> liste = new ArrayList<String>();
+	ArrayList<JTextArea> liste = new ArrayList<JTextArea>();
 	
-	public ReservationMovie(JFrame j, ArrayList<String> s) {
-		liste.add("HARRY POTTER:");
-		liste.add("fazkfla,lkef");
-		liste.add("eklsfes fks");
-		liste.add("d svlknskenlksefnksenf");
-		
+	public ReservationMovie(JFrame jFrame, StateMachine stateM, ArrayList<String> s) {
+		this.jF=jFrame;
+		this.stateMachine=stateM;
+		for(int i = 0; i<s.size();i++) {
+			liste.add(new JTextArea(s.get(i)));
+			liste.get(i).setEditable(false);
+			liste.get(i).setLineWrap(true);
+			liste.get(i).setWrapStyleWord(true);
+		}
 		
 		this.setLayout(new BorderLayout());
 		this.add(jPanel_north,BorderLayout.NORTH);
@@ -64,19 +73,9 @@ public class ReservationMovie extends JPanel {
 		jPanel_center.setLayout(new GridLayout(1,2));
 		jPanel_center.add(jPanel_center_west);
 		
-		jPanel_center_west.setBackground(Color.pink);
-		jPanel_center_west.setLayout(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 10;
-		gbc.gridy = GridBagConstraints.RELATIVE;
-		gbc.fill = GridBagConstraints.VERTICAL;
-		gbc.ipady = gbc.anchor = GridBagConstraints.WEST;
-		gbc.insets = new Insets(10, 10, 10, 10);
-		
-		
+		jPanel_center_west.setLayout(new GridLayout(liste.size(),1));
 		for(int i = 0; i<liste.size();i++) {
-			jPanel_center_west.add(new JLabel(liste.get(i)),gbc);
-			
+			jPanel_center_west.add(liste.get(i));
 		}
 		
 		
@@ -102,5 +101,17 @@ public class ReservationMovie extends JPanel {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+	}
+
+	@Override
+	public void addStateMachine(StateMachine stateMachine) {
+		this.stateMachine=stateMachine;
+		
+	}
+
+	@Override
+	public void changeState(String EVENT) {
+		// TODO Auto-generated method stub
+		
 	}
 }
