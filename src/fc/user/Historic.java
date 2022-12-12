@@ -68,4 +68,14 @@ public abstract class Historic{
 	public void endRent(int idMovie, String endDate) {
 		
 	}
+
+	public HashMap<String, Rentable> getHistoric() {
+		return historic;
+	}
+
+	public void setHistoric(HashMap<String, Rentable> historic) {
+		this.historic = historic;
+	}
+	
+	
 }

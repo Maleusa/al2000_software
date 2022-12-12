@@ -12,13 +12,9 @@ import java.lang.reflect.InvocationTargetException;
 public abstract class Tag  {
 	private String tag;
 	private int prio;
-	/**
-	 * Un tag ne peut jamais être instancié avec 
-	 * un constructeur vide, redefinir le type d'exception que l'on throw?
-	 * @throws Exception
-	 */
-	public Tag() throws Exception {
-		throw new Exception("Un Tag vide ne peut pas exister");
+	
+	public Tag()  {
+		
 	}
 	/**
 	 * Constructeur de base d'un tag prenant un string en argument

@@ -2,6 +2,10 @@ package ui.stateMachine;
 
 import java.util.ArrayList;
 
+
+import fc.machine.Stock;
+import fc.searchengine.SearchEngine;
+import fc.user.User;
 import fc.uiInterface.Observer;
 import fc.uiInterface.UIObserver;
 import ui.SearchRepresentation;
@@ -14,9 +18,10 @@ import ui.UserRepresentation;
  */
 public class StateMachine {
 	
-	protected UiRepresentation user;
-	protected UiRepresentation bluRayStock;
-	protected UiRepresentation searchResult;
+	protected User userModel;
+	protected SearchEngine searchModel;
+	protected Stock searchResult;
+	protected Stock bluRayStock;
 	
 	protected ArrayList<Page> previousState;
 	protected Page currentPage;
@@ -28,31 +33,10 @@ public class StateMachine {
 	public static String SEARCH_UPDATE="SEARCH_UPDATE";
 	public StateMachine() {
 		currentPage=new DefaultPage();
-		user= new UserRepresentation();
-		bluRayStock=new StockRepresentation();
-		searchResult = new SearchRepresentation();
-		currentPage.addStateMachine(this);
+		
 	}
 	
-	public void updateRepresentation(String EVENT, UiRepresentation representation) {
-		switch(EVENT){
-			case "USER_UPDATE":
-				this.user=representation;
-				repaint();
-				break;
-			case "STOCK_UPDATE":
-				this.bluRayStock=representation;
-				repaint();
-				break;
-			case "SEARCH_UPDATE":
-				this.searchResult=representation;
-				repaint();
-				break;
-			default:
-				break;
-		}
-			 
-	}
+	
 	
 	public void changeState(String EVENT) {
 		previousState.add(currentPage);

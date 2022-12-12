@@ -6,6 +6,7 @@ import fc.ComponentFC;
 import fc.constants.MovieState;
 import fc.uiInterface.UIObserver;
 
+
 /*
  * A BluRay is a Rentable object wich contains a movie, an id and a state (cf MovieState)
  */
