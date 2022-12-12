@@ -17,7 +17,10 @@ public class NameTag extends Tag {
 		super(name.getTag(),Priority.UN);
 	}
 
-	
+	public NameTag clone() {
+		return new NameTag(this);
+
+	}
 
 	@Override
 	public String query() {

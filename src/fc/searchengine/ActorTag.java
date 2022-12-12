@@ -21,5 +21,11 @@ public class ActorTag extends Tag {
 		String s = new String("ACTEURS LIKE '%"+this.getTag()+"%'");
 		return s;
 	}
+	
+	public ActorTag clone() {
+		return new ActorTag(this);
 
+	}
 }
+
+

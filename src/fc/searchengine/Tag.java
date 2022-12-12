@@ -9,7 +9,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author yazid
  *
  */
-public abstract class Tag  {
+public abstract class Tag implements Cloneable  {
 	private String tag;
 	private int prio;
 	
@@ -94,7 +94,10 @@ public abstract class Tag  {
 	}
 	public int getPrio() {
 		return prio;
+		
+		
 	}
+	public abstract Tag clone();
 	public void setPrio(int prio) {
 		this.prio = prio;
 	}

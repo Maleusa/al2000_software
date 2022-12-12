@@ -41,7 +41,7 @@ public class Subscriber extends User {
 				if(checkIdentity(data.get(0))) identified=true;
 				break;
 			case "UPDATE_SUBSCRIBER_EVENT_TYPE":
-				//data is : {"Nom", "Mot de passe", "Adresse", "Genre bloqué", "Solde"}
+				//data is : {"Nom", "Mot de passe", "Adresse", "Genre bloquï¿½", "Solde"}
 				this.name = data.get(0);
 				this.password = data.get(1);
 				this.adress = data.get(2);
@@ -75,10 +75,10 @@ public class Subscriber extends User {
 				int price = calculatePrice(1);
 				if(this.subscriberBalance>price) subscriberBalance -= price;
 				else debitBankCard(price);
-				// QRCODE_RENT_EVENT_DAO: data = {idBluRay, idUser, idAbonne, Price}
+				// QRCODE_RENT_EVENT_DAO: data = {idMovie, idUser, idAbonne, Price}
 				break;
 			case "REFOUND_TECHNICAL_EVENT_TYPE":
-				//PAS sûr qu'il là soit en réalité le refund c'est un trigger de bd et quand initialisation on aura la nouvelle valeur d'argent
+				//PAS sï¿½r qu'il lï¿½ soit en rï¿½alitï¿½ le refund c'est un trigger de bd et quand initialisation on aura la nouvelle valeur d'argent
 				break;
 			default:
 				break;

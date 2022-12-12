@@ -24,26 +24,18 @@ public class BasicSearch extends SearchEngine{
 	public void update(String EVENT_TYPE, ArrayList<String> data) {
 		switch(EVENT_TYPE) {
 				case "SEARCH_BY_TAG":
-					ArrayList<Tag> searchTag = new TagBuilder().buildListTag(data);
+					ArrayList<Tag> searchTag = new TagBuilder().buildListTag(data,this.getTagSelection());
 					ArrayList<BluRay> resultStock =stockResearch(searchTag);
-					ArrayList<QRCode> resultDataBase = null;//ici query la db
+					ArrayList<QRCode> resultDataBase = new ArrayList<QRCode>();//ici query la db
 					machine.getSearchResultStock().setStock(resultDataBase); //POUR UML
-					//TRI du result
-					ArrayList<ArrayList> dataSent = new ArrayList<ArrayList>();
-					dataSent.add(resultStock);
-					dataSent.add(resultDataBase);
-					if (dataSent.isEmpty()) searchToStateMachine.notify("NO_RESULT",dataSent);
-					searchToStateMachine.notify("RESEARCH_RESULT", dataSent);
+					machine.getStock().setSearchStock(resultStock);
 					break;
 				case "SEARCH_NO_TAG":
-					searchTag = new TagBuilder().buildAllTag(data);
-					resultStock =stockResearch(searchTag);
-					resultDataBase = null;//ici query la db
-					dataSent = new ArrayList<ArrayList>();
-					dataSent.add(resultStock);
-					dataSent.add(resultDataBase);
-					if (dataSent.isEmpty()) searchToStateMachine.notify("NO_RESULT",dataSent);
-					searchToStateMachine.notify("RESEARCH_RESULT", dataSent);
+					ArrayList<Tag> searchAllTag = new TagBuilder().buildAllTag(data,this.getTagSelection());
+					ArrayList<BluRay> resultAllStock =stockResearch(searchAllTag);
+					ArrayList<QRCode> resultAllDataBase = new ArrayList<QRCode>();//ici query la db
+					machine.getSearchResultStock().setStock(resultAllDataBase); //POUR UML
+					machine.getStock().setSearchStock(resultAllStock);
 					break;
 				default :
 					break;
